@@ -241,47 +241,47 @@
     <!-- ATTRACTIONS -->
     <h3 class="subsection-title">Attractions</h3>
     <div class="cards-grid">
-      <div class="card">
+      <div class="card" data-attraction="bud_baths">
         <div class="card-cost">~€25</div>
         <h4>Thermal Baths</h4>
         <p>Széchenyi (outdoor, iconic) or Gellért (art nouveau). ~€25 w/ locker. Go mornings.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="bud_ruinbars">
         <div class="card-cost">Free</div>
         <h4>Ruin Bars</h4>
         <p>Szimpla Kert (go before 10 PM). Instant-Fogas (massive). Élesztő (craft). Jewish Quarter walkable bar-to-bar.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="bud_castle">
         <div class="card-cost">Free–€6</div>
         <h4>Buda Castle & Fisherman's Bastion</h4>
         <p>Walk or funicular up. Bastion free (upper €6). Best Parliament views. Sunset.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="bud_gellert">
         <div class="card-cost">Free</div>
         <h4>Gellért Hill</h4>
         <p>Short steep hike, 360° city view. Best at sunset.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="bud_parliament">
         <div class="card-cost">Free–€10</div>
         <h4>Parliament</h4>
         <p>Stunning outside (lit at night). Interior ~€10 EU students.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="bud_danube">
         <div class="card-cost">Free</div>
         <h4>Danube Night Walk</h4>
         <p>Riverbank Chain Bridge to Parliament after dark. Shoes on the Danube memorial.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="bud_market">
         <div class="card-cost">€3–8</div>
         <h4>Central Market Hall</h4>
         <p>Iron-and-glass building. Lángos upstairs, paprika downstairs.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="bud_vajda">
         <div class="card-cost">Free–€5</div>
         <h4>Vajdahunyad Castle</h4>
         <p>Fairy-tale castle in City Park. Romanesque/Gothic/Renaissance mashup. Pair with Heroes' Square next door.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="bud_zoo">
         <div class="card-cost">€5–10</div>
         <h4>Zoo Café</h4>
         <p>Coffee shop with exotic animals — parrots, reptiles, hedgehogs. Fejér György u. 3 (District V). Open til 9 PM.</p>
@@ -335,32 +335,32 @@
     <!-- ATTRACTIONS -->
     <h3 class="subsection-title">Attractions</h3>
     <div class="cards-grid">
-      <div class="card">
+      <div class="card" data-attraction="vie_stephansdom">
         <div class="card-cost">Free–€6</div>
         <h4>Stephansdom</h4>
         <p>Free entry; south tower €6 for panorama.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="vie_coffeehouse">
         <div class="card-cost">€8–14</div>
         <h4>Viennese Coffeehouse</h4>
         <p>Café Central (gorgeous) or Café Sperl (old-world). Melange + Apfelstrudel.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="vie_belvedere">
         <div class="card-cost">Free–€16</div>
         <h4>Belvedere — Klimt's 'The Kiss'</h4>
         <p>€16 (student discount?). Gardens free + great photos.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="vie_prater">
         <div class="card-cost">€3–14</div>
         <h4>Prater & Ferris Wheel</h4>
         <p>Park free; Riesenrad €14. Langos €3.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="vie_naschmarkt">
         <div class="card-cost">Free</div>
         <h4>Naschmarkt</h4>
         <p>Biggest market. Street food, spices. Sat = flea market. Closes ~6 PM.</p>
       </div>
-      <div class="card">
+      <div class="card" data-attraction="vie_heuriger">
         <div class="card-cost">€12–18</div>
         <h4>Heuriger Wine Tavern</h4>
         <p>Tram to Grinzing. Local wine, cold buffet, fairy-lit gardens.</p>
@@ -655,20 +655,19 @@
         <div class="open-q">
           <label for="wishlist" class="poll-label">Wishlist & Ideas</label>
           <p class="open-q-hint">Anything you specifically want to do, see, or eat?</p>
-          <textarea id="wishlist" name="wishlist" class="poll-textarea" rows="3" placeholder="e.g. I really want to try lángos, and I'd love a rooftop bar..."></textarea>
+          <textarea id="wishlist" name="wishlist" class="poll-textarea" rows="1" placeholder="e.g. I really want to try lángos..."></textarea>
         </div>
 
         <div class="open-q">
           <label for="concerns" class="poll-label">Concerns or Schedule Conflicts</label>
           <p class="open-q-hint">Budget, flight times, things to avoid?</p>
-          <textarea id="concerns" name="concerns" class="poll-textarea" rows="3" placeholder="e.g. I need to be back by Sunday night, allergic to shellfish..."></textarea>
+          <textarea id="concerns" name="concerns" class="poll-textarea" rows="1" placeholder="e.g. allergic to shellfish..."></textarea>
         </div>
       </div>
 
       <!-- SUBMIT -->
       <div class="poll-submit-wrap">
-        <button type="button" id="poll-submit" class="poll-submit">Copy My Votes</button>
-        <p class="poll-submit-hint">Copies your responses as text so you can paste them in the group chat.</p>
+        <button type="button" id="poll-submit" class="poll-submit">Submit Vote</button>
       </div>
 
     </form>
@@ -676,9 +675,8 @@
     <!-- CONFIRMATION -->
     <div id="poll-confirmation" class="poll-confirmation" hidden>
       <div class="poll-confirmation-icon">✓</div>
-      <h3>Vote saved &amp; copied to clipboard</h3>
-      <p>Your vote is recorded. Paste in the group chat if you like — or just check the results below.</p>
-      <pre id="poll-output" class="poll-output"></pre>
+      <h3>Vote saved</h3>
+      <p>Your responses are recorded. Check the results below.</p>
       <button type="button" id="poll-reset" class="poll-reset">Vote Again</button>
     </div>
 
@@ -696,9 +694,10 @@
   </div>
 </section>
 
-<!-- MENU MODAL -->
+<!-- MENU / ATTRACTION MODAL -->
 <div class="menu-modal-overlay" id="menu-modal-overlay">
   <div class="menu-modal" id="menu-modal">
+    <div class="menu-modal-photo-wrap" id="menu-modal-photo-wrap" style="display:none"></div>
     <div class="menu-modal-header">
       <h3 id="menu-modal-name"></h3>
       <button class="menu-modal-close" id="menu-modal-close" aria-label="Close">&times;</button>
@@ -895,32 +894,6 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
     store.set(STORAGE_KEY, JSON.stringify(votes));
   }
 
-  // Build clipboard text
-  function buildClipboardText(name, voteData) {
-    let txt = `🗳️ VOTES — ${name}\n${'─'.repeat(30)}\n\n`;
-    txt += '🇭🇺 BUDAPEST\n';
-    budActivities.forEach(a => {
-      txt += `  ${a.icon} ${a.label}: ${(voteData[a.key] || '—').toUpperCase()}\n`;
-    });
-    txt += '\n🇦🇹 VIENNA\n';
-    vieActivities.forEach(a => {
-      txt += `  ${a.icon} ${a.label}: ${(voteData[a.key] || '—').toUpperCase()}\n`;
-    });
-    txt += '\n📊 PRIORITIES\n';
-    if (voteData.priorities) {
-      voteData.priorities.forEach((k, i) => {
-        const p = priorityItems.find(x => x.key === k);
-        if (p) txt += `  ${i+1}. ${p.icon} ${p.label}\n`;
-      });
-    }
-    txt += '\n❓ QUICK QUESTIONS\n';
-    txt += `  Diet: ${(voteData.diet || '—').replace(/_/g, ' ')}\n`;
-    txt += `  Local food: ${(voteData.local_food || '—').replace(/_/g, ' ')}\n`;
-    if (voteData.wishlist) txt += `\n💡 WISHLIST\n  ${voteData.wishlist}\n`;
-    if (voteData.concerns) txt += `\n⚠️ CONCERNS\n  ${voteData.concerns}\n`;
-    return txt;
-  }
-
   // Submit handler
   document.getElementById('poll-submit').addEventListener('click', () => {
     const form = document.getElementById('poll-form');
@@ -951,19 +924,21 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
     else votes.push(voteData);
     saveVotes(votes);
 
-    // Clipboard text
-    const txt = buildClipboardText(name, voteData);
-    navigator.clipboard.writeText(txt).catch(() => {});
-
     // Show confirmation
-    document.getElementById('poll-output').textContent = txt;
     form.hidden = true;
     const conf = document.getElementById('poll-confirmation');
     conf.hidden = false;
     conf.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    // Refresh results
+    // Open and refresh results
     renderResults();
+    const panel = document.getElementById('results-panel');
+    const toggle = document.getElementById('results-toggle');
+    if (!panel.classList.contains('open')) {
+      panel.classList.add('open');
+      toggle.classList.add('open');
+      toggle.querySelector('span:first-child').textContent = 'Hide Results';
+    }
   });
 
   // Reset
@@ -1549,9 +1524,19 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
   const modalTip = document.getElementById('menu-modal-tip');
   const closeBtn = document.getElementById('menu-modal-close');
 
-  function openMenu(key) {
-    const data = menuData[key];
+  const photoWrap = document.getElementById('menu-modal-photo-wrap');
+
+  function openModal(data) {
     if (!data) return;
+
+    // Photo
+    if (data.photo) {
+      photoWrap.innerHTML = `<img class="menu-modal-photo" src="${data.photo}" alt="${data.name}" loading="lazy">`;
+      photoWrap.style.display = '';
+    } else {
+      photoWrap.innerHTML = '';
+      photoWrap.style.display = 'none';
+    }
 
     modalName.textContent = data.name;
 
@@ -1589,6 +1574,10 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
     document.body.style.overflow = 'hidden';
   }
 
+  function openMenu(key) {
+    openModal(menuData[key]);
+  }
+
   function closeMenu() {
     overlay.classList.remove('menu-modal--open');
     document.body.style.overflow = '';
@@ -1609,6 +1598,262 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
+  });
+
+  // ===== ATTRACTION DATA =====
+  const attractionData = {
+    bud_baths: {
+      name: 'Széchenyi Thermal Baths',
+      type: 'Thermal Spa',
+      price: '~€25',
+      address: 'Állatkerti körút 9–11, City Park',
+      hours: '6 AM – 10 PM daily',
+      photo: 'https://images.unsplash.com/photo-1573155993874-d5d48af862ba?w=800&h=400&fit=crop',
+      desc: 'The largest medicinal bath in Europe, built in 1913 in stunning neo-Baroque style. The outdoor pools are iconic — steam rising off bright yellow buildings. Choose Széchenyi for the outdoor party atmosphere or Gellért for art-nouveau elegance.',
+      sections: [{ title: 'What to Know', dishes: [
+        { name: 'Entry with locker', price: '~€25' },
+        { name: 'Entry with cabin (private changing)', price: '~€28' },
+        { name: 'Towel rental', price: '~€4' },
+        { name: 'Massage (20 min)', price: '~€25' },
+      ]}],
+      tip: 'Go in the morning to avoid crowds. Bring flip-flops and a lock. Weekdays are quieter.'
+    },
+    bud_ruinbars: {
+      name: 'Ruin Bars',
+      type: 'Nightlife / Bars',
+      price: 'Free entry',
+      address: 'Jewish Quarter (District VII)',
+      hours: 'Most open ~noon – 3 AM',
+      photo: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&h=400&fit=crop',
+      desc: 'Budapest\'s ruin bars are legendary — sprawling pubs built inside abandoned buildings and courtyards, filled with eclectic furniture, street art, and cheap drinks. Szimpla Kert is the original and most famous. Instant-Fogas is massive with multiple floors and music venues.',
+      sections: [{ title: 'Top Picks', dishes: [
+        { name: 'Szimpla Kert (the original, go before 10 PM)' },
+        { name: 'Instant-Fogas (huge, multi-level)' },
+        { name: 'Élesztő (craft beer focus)' },
+        { name: 'Doboz (late-night dancing)' },
+        { name: 'Boutiq\'Bar (upscale cocktails)', price: '~€7' },
+      ]}],
+      tip: 'Drinks are cheap (€2–4 for beer). Start at Szimpla then walk — they\'re all within minutes of each other.'
+    },
+    bud_castle: {
+      name: 'Buda Castle & Fisherman\'s Bastion',
+      type: 'Historic Landmark',
+      price: 'Free–€6',
+      address: 'Castle Hill, Buda side',
+      hours: 'Open 24/7 (upper bastion terrace €6, 9 AM–7 PM)',
+      photo: 'https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=800&h=400&fit=crop',
+      desc: 'The medieval castle complex on the Buda hilltop offers the best panoramic views of Parliament and the Danube. Fisherman\'s Bastion is a fairytale-white terrace with seven turrets representing the seven Magyar tribes. Walk up or take the funicular.',
+      sections: [{ title: 'Highlights', dishes: [
+        { name: 'Fisherman\'s Bastion lower terrace', price: 'Free' },
+        { name: 'Upper terrace', price: '€6' },
+        { name: 'Matthias Church', price: '~€8' },
+        { name: 'Hungarian National Gallery', price: '~€12' },
+        { name: 'Castle Hill funicular', price: '~€6 one way' },
+      ]}],
+      tip: 'Go at sunset for the best light on Parliament. The lower terrace of the Bastion is free and nearly as good.'
+    },
+    bud_gellert: {
+      name: 'Gellért Hill',
+      type: 'Viewpoint / Hike',
+      price: 'Free',
+      address: 'Gellért Hill, Buda side',
+      hours: 'Open 24/7',
+      photo: 'https://images.unsplash.com/photo-1541343672885-9be56236302a?w=800&h=400&fit=crop',
+      desc: 'A short but steep hike up to the Citadella fortress at the top, rewarding you with a full 360° panorama of Budapest. On one side, Parliament and the Chain Bridge; on the other, the Buda hills. The Liberty Statue at the summit is iconic.',
+      sections: [{ title: 'What to Know', dishes: [
+        { name: 'Walk up from Danube bank (15–20 min)' },
+        { name: 'Citadella fortress', price: 'Free exterior' },
+        { name: 'Liberty Statue (1947, hilltop)' },
+        { name: 'Cave Church (below, carved into rock)', price: 'Free' },
+      ]}],
+      tip: 'Best at sunset. Bring water — the climb is steep. Watch for pickpockets at the top.'
+    },
+    bud_parliament: {
+      name: 'Hungarian Parliament Building',
+      type: 'Landmark / Tour',
+      price: 'Free–€10',
+      address: 'Kossuth Lajos tér 1–3',
+      hours: 'Tours daily 8 AM–6 PM (book online)',
+      photo: 'https://images.unsplash.com/photo-1551867633-194f125bddfa?w=800&h=400&fit=crop',
+      desc: 'One of the most beautiful parliament buildings in the world — Gothic Revival masterpiece on the Danube bank. Stunning inside and out. The exterior lit up at night is unmissable. Interior tours show the Crown Jewels and the grand staircase.',
+      sections: [{ title: 'Details', dishes: [
+        { name: 'Exterior & night viewing', price: 'Free' },
+        { name: 'Interior guided tour (EU citizens)', price: '~€10' },
+        { name: 'EU students under 24', price: 'Free' },
+        { name: 'Kossuth Square & Shoes on the Danube', price: 'Free' },
+      ]}],
+      tip: 'Book the interior tour online in advance — slots fill up. Bring passport for EU student discount.'
+    },
+    bud_danube: {
+      name: 'Danube Night Walk',
+      type: 'Scenic Walk',
+      price: 'Free',
+      address: 'Pest embankment, Chain Bridge to Parliament',
+      hours: 'Best after dark',
+      photo: 'https://images.unsplash.com/photo-1565426873118-a17ed65d74b9?w=800&h=400&fit=crop',
+      desc: 'The Pest-side riverbank after dark is one of Europe\'s most beautiful night walks. Parliament glows gold, the Chain Bridge sparkles, and Buda Castle sits illuminated on the hill. The Shoes on the Danube memorial (iron shoes along the bank) is a moving Holocaust tribute.',
+      sections: [{ title: 'Route Highlights', dishes: [
+        { name: 'Chain Bridge (‘Széchenyi Lánchíd\')' },
+        { name: 'Shoes on the Danube memorial' },
+        { name: 'Parliament lit up (best from the bank)' },
+        { name: 'Margaret Bridge views' },
+      ]}],
+      tip: 'Parliament lights stay on until midnight. Combine with a ruin bar crawl after.'
+    },
+    bud_market: {
+      name: 'Central Market Hall',
+      type: 'Market / Food Hall',
+      price: 'Free entry',
+      address: 'Vámház körút 1–3',
+      hours: 'Mon 6 AM–5 PM, Tue–Fri 6 AM–6 PM, Sat 6 AM–3 PM, Sun closed',
+      photo: 'https://images.unsplash.com/photo-1577208288705-bff3aa5d4a57?w=800&h=400&fit=crop',
+      desc: 'Budapest\'s grandest market in a stunning 19th-century iron-and-glass hall. Ground floor: fresh produce, meats, paprika, and Hungarian specialties. Upper floor: food stalls serving lángos, goulash, and other hot dishes. Also crafts and souvenirs.',
+      sections: [{ title: 'Must-Try', dishes: [
+        { name: 'Lángos (fried dough w/ sour cream & cheese)', price: '€3–5' },
+        { name: 'Hungarian paprika (gift packs)', price: '€3–8' },
+        { name: 'Kolbász (sausage) sandwich', price: '~€4' },
+        { name: 'Palacsinta (crêpes)', price: '~€3' },
+      ]}],
+      tip: 'Go on a weekday morning for fewer tourists. Upper floor is touristy but fun. Closed Sunday.'
+    },
+    bud_vajda: {
+      name: 'Vajdahunyad Castle',
+      type: 'Castle / Park',
+      price: 'Free–€5',
+      address: 'City Park (Városliget)',
+      hours: 'Grounds open 24/7, museum 10 AM–5 PM',
+      photo: 'https://images.unsplash.com/photo-1577083165633-14ebcdb0f658?w=800&h=400&fit=crop',
+      desc: 'A fairy-tale castle in Budapest\'s City Park, originally built as a temporary cardboard structure for the 1896 Millennial Exhibition and later rebuilt in stone. It\'s a whimsical mashup of Romanesque, Gothic, Renaissance, and Baroque styles — all in one building.',
+      sections: [{ title: 'Details', dishes: [
+        { name: 'Castle grounds & courtyard', price: 'Free' },
+        { name: 'Agricultural Museum (inside)', price: '~€5' },
+        { name: 'Heroes\' Square (right next door)', price: 'Free' },
+        { name: 'City Park lake (boating in summer)', price: '~€5' },
+      ]}],
+      tip: 'Pair with Heroes\' Square and Széchenyi Baths — all in the same park. Great for photos.'
+    },
+    bud_zoo: {
+      name: 'Zoo Café',
+      type: 'Animal Café',
+      price: '€5–10',
+      address: 'Fejér György u. 3, District V',
+      hours: '10 AM – 9 PM daily',
+      photo: 'https://images.unsplash.com/photo-1559253664-ca249d4608c6?w=800&h=400&fit=crop',
+      desc: 'A quirky café where you can sip coffee surrounded by exotic animals — parrots, reptiles, hedgehogs, guinea pigs, and more. Fun for a unique Budapest experience. You can hold and interact with the animals while enjoying drinks.',
+      sections: [{ title: 'Pricing', dishes: [
+        { name: 'Entry + 1 drink', price: '~€8' },
+        { name: 'Extra drinks', price: '~€3–5' },
+        { name: 'Animal feeding experience', price: '~€3' },
+      ]}],
+      tip: 'Good for a 30–45 min visit. Not big — more of a novelty than a full outing.'
+    },
+    vie_stephansdom: {
+      name: 'Stephansdom (St. Stephen\'s Cathedral)',
+      type: 'Cathedral / Landmark',
+      price: 'Free–€6',
+      address: 'Stephansplatz, 1st District',
+      hours: 'Mon–Sat 6 AM–10 PM, Sun 7 AM–10 PM',
+      photo: 'https://images.unsplash.com/photo-1609856878074-cf31e21ccb6b?w=800&h=400&fit=crop',
+      desc: 'Vienna\'s most iconic landmark — a Gothic and Romanesque cathedral with a stunning tiled roof. Free to enter the nave. Pay to climb the south tower (343 steps) for a panoramic view, or take the elevator up the north tower to see the giant Pummerin bell.',
+      sections: [{ title: 'Options', dishes: [
+        { name: 'Cathedral entry (nave)', price: 'Free' },
+        { name: 'South tower climb (343 steps)', price: '€6' },
+        { name: 'North tower elevator', price: '€6' },
+        { name: 'Catacombs tour', price: '€6' },
+        { name: 'All-inclusive ticket', price: '€20' },
+      ]}],
+      tip: 'The south tower climb is worth it for the view. The colorful zigzag roof tiles are best seen from above.'
+    },
+    vie_coffeehouse: {
+      name: 'Viennese Coffeehouses',
+      type: 'Café Culture Experience',
+      price: '€8–14',
+      address: 'Various — 1st & 6th Districts',
+      hours: 'Typically 7 AM–10 PM',
+      photo: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=400&fit=crop',
+      desc: 'Viennese coffeehouse culture is a UNESCO Intangible Cultural Heritage. These grand cafés have been gathering spots for artists, writers, and thinkers since the 1800s. Order a Wiener Melange (like a cappuccino) with Apfelstrudel, grab a newspaper, and stay a while.',
+      sections: [{ title: 'Where to Go', dishes: [
+        { name: 'Café Central — grand, famous, touristy', price: '~€16 for breakfast' },
+        { name: 'Café Sperl — authentic, local, relaxed', price: '~€10 for breakfast' },
+        { name: 'Wiener Melange (Viennese cappuccino)', price: '~€5–7' },
+        { name: 'Apfelstrudel', price: '~€6–9' },
+        { name: 'Sachertorte', price: '~€7–8' },
+      ]}],
+      tip: 'Café Central may be closed for renovation from March 2026 — check first. Sperl is the more authentic pick.'
+    },
+    vie_belvedere: {
+      name: 'Belvedere Palace & Klimt\'s "The Kiss"',
+      type: 'Museum / Palace',
+      price: 'Free–€16',
+      address: 'Prinz-Eugen-Straße 27, 3rd District',
+      hours: '10 AM–6 PM daily (Fri until 9 PM)',
+      photo: 'https://images.unsplash.com/photo-1568223573250-57e4a1150b1a?w=800&h=400&fit=crop',
+      desc: 'A stunning Baroque palace complex housing Austria\'s most important art collection. The Upper Belvedere is home to Klimt\'s "The Kiss" and other masterpieces. The gardens between the upper and lower palaces are free and offer great photo ops with the city skyline behind.',
+      sections: [{ title: 'Details', dishes: [
+        { name: 'Upper Belvedere (Klimt, Schiele)', price: '€16' },
+        { name: 'Lower Belvedere', price: '€16' },
+        { name: 'Combo ticket (both)', price: '€24' },
+        { name: 'Gardens & grounds', price: 'Free' },
+      ]}],
+      tip: 'Just the Upper Belvedere is enough — The Kiss alone is worth the visit. Gardens are gorgeous for photos.'
+    },
+    vie_prater: {
+      name: 'Prater & Riesenrad (Giant Ferris Wheel)',
+      type: 'Amusement Park',
+      price: '€3–14',
+      address: 'Prater, 2nd District',
+      hours: 'Park: 24/7, Riesenrad: 10 AM–10 PM',
+      photo: 'https://images.unsplash.com/photo-1582547094714-78b66cdd0cb4?w=800&h=400&fit=crop',
+      desc: 'A massive public park with a classic amusement area (the Würstelprater). The 1897 Riesenrad giant Ferris wheel is a Vienna icon — featured in "The Third Man." The park itself is free with trees, running paths, and beer gardens. Lángos stands at the Prater are cheap and great.',
+      sections: [{ title: 'Pricing', dishes: [
+        { name: 'Prater park entry', price: 'Free' },
+        { name: 'Riesenrad (Ferris wheel)', price: '€14' },
+        { name: 'Individual rides', price: '€3–5 each' },
+        { name: 'Lángos at the Prater', price: '~€3' },
+      ]}],
+      tip: 'The Ferris wheel at sunset is magic. The park is huge — great for an afternoon stroll.'
+    },
+    vie_naschmarkt: {
+      name: 'Naschmarkt',
+      type: 'Food Market',
+      price: 'Free entry',
+      address: 'Wienzeile, between Karlsplatz & Kettenbrückengasse',
+      hours: 'Mon–Fri 6 AM–7:30 PM, Sat 6 AM–6 PM, Sun closed (Sat = flea market)',
+      photo: 'https://images.unsplash.com/photo-1578301978162-3fa7276a43be?w=800&h=400&fit=crop',
+      desc: 'Vienna\'s most popular outdoor market — a long, buzzing strip of food stalls, restaurants, spice vendors, and produce stands. Over 120 stalls. Great for grabbing lunch, people-watching, or picking up olives, cheese, and baklava. Saturday flea market at the far end is excellent.',
+      sections: [{ title: 'Must-Try', dishes: [
+        { name: 'Falafel or kebab stand', price: '~€5' },
+        { name: 'Oysters & white wine stand', price: '~€12' },
+        { name: 'Fresh olives & antipasti', price: '~€4' },
+        { name: 'Vietnamese pho', price: '~€8' },
+        { name: 'NENI am Naschmarkt (sit-down)', price: '~€13' },
+      ]}],
+      tip: 'Saturday is the best day (flea market bonus). Go hungry. Closes early on Sat, closed Sun.'
+    },
+    vie_heuriger: {
+      name: 'Heuriger Wine Tavern',
+      type: 'Wine Tavern / Cultural Experience',
+      price: '€12–18',
+      address: 'Grinzing or Neustift am Walde (tram ride from center)',
+      hours: 'Typically 4 PM–11 PM',
+      photo: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&h=400&fit=crop',
+      desc: 'A uniquely Viennese tradition — rustic wine taverns on the outskirts of the city where local winemakers serve their own new wine. Fairy-lit gardens, cold buffets, and a cozy atmosphere. Grinzing is the most traditional village; Neustift am Walde is more local.',
+      sections: [{ title: 'What to Expect', dishes: [
+        { name: '1/4 liter of local wine', price: '~€4' },
+        { name: 'G\'spritzter (wine spritzer)', price: '~€3' },
+        { name: 'Cold buffet plate (meats, spreads, bread)', price: '~€8–12' },
+        { name: 'Schmalzbrot (lard bread)', price: '~€3' },
+      ]}],
+      tip: 'Take the tram to Grinzing (line 38). A pine branch on the door means the Heuriger is open. Cash helps.'
+    },
+  };
+
+  // Click handlers on attraction cards
+  document.querySelectorAll('[data-attraction]').forEach(card => {
+    card.addEventListener('click', () => {
+      const data = attractionData[card.dataset.attraction];
+      if (data) openModal(data);
+    });
   });
 })();
 </script>

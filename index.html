@@ -676,10 +676,21 @@
     <!-- CONFIRMATION -->
     <div id="poll-confirmation" class="poll-confirmation" hidden>
       <div class="poll-confirmation-icon">✓</div>
-      <h3>Copied to clipboard</h3>
-      <p>Paste your votes into the group chat. Thanks for voting!</p>
+      <h3>Vote saved &amp; copied to clipboard</h3>
+      <p>Your vote is recorded. Paste in the group chat if you like — or just check the results below.</p>
       <pre id="poll-output" class="poll-output"></pre>
       <button type="button" id="poll-reset" class="poll-reset">Vote Again</button>
+    </div>
+
+    <!-- RESULTS DASHBOARD -->
+    <div class="results-section" id="results-section">
+      <div class="results-toggle-wrap">
+        <button type="button" class="results-toggle" id="results-toggle">
+          <span>View Results</span>
+          <span class="arrow">▼</span>
+        </button>
+      </div>
+      <div class="results-panel" id="results-panel"></div>
     </div>
 
   </div>
@@ -833,85 +844,292 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
   }
 })();
 
-// ===== POLL: Copy votes =====
-document.getElementById('poll-submit').addEventListener('click', () => {
-  const form = document.getElementById('poll-form');
-  const name = form.voter_name.value.trim() || 'Anonymous';
-  let txt = `🗳️ VOTES — ${name}\n${'─'.repeat(30)}\n\n`;
+// ===== VOTE TALLY SYSTEM =====
+(function() {
+  const STORAGE_KEY = 'budvienna_votes';
 
-  txt += '🇭🇺 BUDAPEST\n';
-  const budItems = [
-    ['bud_prosecco', '🥂 Prosecco Cruise'],
-    ['bud_baths', '♨️ Thermal Baths'],
-    ['bud_szimpla', '🍻 Szimpla Kert'],
-    ['bud_castle', '🏰 Buda Castle'],
-    ['bud_gellert', '🌅 Gellért Hill'],
-    ['bud_parliament', '🏛️ Parliament'],
-    ['bud_market', '🛒 Central Market'],
-    ['bud_danube', '🌉 Danube Walk'],
-    ['bud_vajda', '🏰 Vajdahunyad'],
-    ['bud_zoo', '🐾 Zoo Café'],
+  // Activity definitions
+  const budActivities = [
+    { key: 'bud_prosecco', icon: '🥂', label: 'Prosecco Cruise' },
+    { key: 'bud_baths',    icon: '♨️', label: 'Thermal Baths' },
+    { key: 'bud_szimpla',  icon: '🍻', label: 'Szimpla Kert' },
+    { key: 'bud_castle',   icon: '🏰', label: 'Buda Castle' },
+    { key: 'bud_gellert',  icon: '🌅', label: 'Gellért Hill' },
+    { key: 'bud_parliament', icon: '🏛️', label: 'Parliament' },
+    { key: 'bud_market',   icon: '🛒', label: 'Central Market' },
+    { key: 'bud_danube',   icon: '🌉', label: 'Danube Walk' },
+    { key: 'bud_vajda',    icon: '🏰', label: 'Vajdahunyad' },
+    { key: 'bud_zoo',      icon: '🐾', label: 'Zoo Café' },
   ];
-  budItems.forEach(([n, label]) => {
-    const v = form[n] ? (form[n].value || '—') : '—';
-    const checked = form.querySelector(`input[name="${n}"]:checked`);
-    txt += `  ${label}: ${checked ? checked.value.toUpperCase() : '—'}\n`;
-  });
-
-  txt += '\n🇦🇹 VIENNA\n';
-  const vieItems = [
-    ['vie_cafe', '☕ Café Central'],
-    ['vie_belvedere', '🎨 Belvedere'],
-    ['vie_prater', '🎡 Prater'],
-    ['vie_heuriger', '🍷 Heuriger'],
-    ['vie_nasch', '🛒 Naschmarkt'],
-    ['vie_volks', '🎵 Volksgarten'],
-    ['vie_mq', '🏛️ MuseumsQuartier'],
+  const vieActivities = [
+    { key: 'vie_cafe',      icon: '☕', label: 'Café Central' },
+    { key: 'vie_belvedere', icon: '🎨', label: 'Belvedere' },
+    { key: 'vie_prater',    icon: '🎡', label: 'Prater' },
+    { key: 'vie_heuriger',  icon: '🍷', label: 'Heuriger' },
+    { key: 'vie_nasch',     icon: '🛒', label: 'Naschmarkt' },
+    { key: 'vie_volks',     icon: '🎵', label: 'Volksgarten' },
+    { key: 'vie_mq',        icon: '🏛️', label: 'MuseumsQuartier' },
   ];
-  vieItems.forEach(([n, label]) => {
-    const checked = form.querySelector(`input[name="${n}"]:checked`);
-    txt += `  ${label}: ${checked ? checked.value.toUpperCase() : '—'}\n`;
+  const priorityItems = [
+    { key: 'food',        icon: '🍽️', label: 'Food & restaurants' },
+    { key: 'nightlife',   icon: '🍸', label: 'Nightlife & bars' },
+    { key: 'sightseeing', icon: '🏛️', label: 'Sightseeing & culture' },
+    { key: 'shopping',    icon: '🛍️', label: 'Shopping & markets' },
+    { key: 'chill',       icon: '😎', label: 'Free time / chill' },
+  ];
+
+  function getVotes() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+  function saveVotes(votes) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
+  }
+
+  // Build clipboard text
+  function buildClipboardText(name, voteData) {
+    let txt = `🗳️ VOTES — ${name}\n${'─'.repeat(30)}\n\n`;
+    txt += '🇭🇺 BUDAPEST\n';
+    budActivities.forEach(a => {
+      txt += `  ${a.icon} ${a.label}: ${(voteData[a.key] || '—').toUpperCase()}\n`;
+    });
+    txt += '\n🇦🇹 VIENNA\n';
+    vieActivities.forEach(a => {
+      txt += `  ${a.icon} ${a.label}: ${(voteData[a.key] || '—').toUpperCase()}\n`;
+    });
+    txt += '\n📊 PRIORITIES\n';
+    if (voteData.priorities) {
+      voteData.priorities.forEach((k, i) => {
+        const p = priorityItems.find(x => x.key === k);
+        if (p) txt += `  ${i+1}. ${p.icon} ${p.label}\n`;
+      });
+    }
+    txt += '\n❓ QUICK QUESTIONS\n';
+    txt += `  Diet: ${(voteData.diet || '—').replace(/_/g, ' ')}\n`;
+    txt += `  Local food: ${(voteData.local_food || '—').replace(/_/g, ' ')}\n`;
+    if (voteData.wishlist) txt += `\n💡 WISHLIST\n  ${voteData.wishlist}\n`;
+    if (voteData.concerns) txt += `\n⚠️ CONCERNS\n  ${voteData.concerns}\n`;
+    return txt;
+  }
+
+  // Submit handler
+  document.getElementById('poll-submit').addEventListener('click', () => {
+    const form = document.getElementById('poll-form');
+    const name = form.voter_name.value.trim() || 'Anonymous';
+
+    // Collect vote data
+    const voteData = { name };
+    [...budActivities, ...vieActivities].forEach(a => {
+      const checked = form.querySelector(`input[name="${a.key}"]:checked`);
+      voteData[a.key] = checked ? checked.value : null;
+    });
+    // Quick questions
+    const diet = form.querySelector('input[name="diet"]:checked');
+    voteData.diet = diet ? diet.value : null;
+    const local = form.querySelector('input[name="local_food"]:checked');
+    voteData.local_food = local ? local.value : null;
+    // Priorities
+    voteData.priorities = [...document.querySelectorAll('#rank-list .rank-item')].map(el => el.dataset.rankKey);
+    // Open-ended
+    voteData.wishlist = form.wishlist.value.trim() || null;
+    voteData.concerns = form.concerns.value.trim() || null;
+    voteData.timestamp = Date.now();
+
+    // Save to localStorage (replace if same name)
+    const votes = getVotes();
+    const existingIdx = votes.findIndex(v => v.name.toLowerCase() === name.toLowerCase());
+    if (existingIdx >= 0) votes[existingIdx] = voteData;
+    else votes.push(voteData);
+    saveVotes(votes);
+
+    // Clipboard text
+    const txt = buildClipboardText(name, voteData);
+    navigator.clipboard.writeText(txt).catch(() => {});
+
+    // Show confirmation
+    document.getElementById('poll-output').textContent = txt;
+    form.hidden = true;
+    const conf = document.getElementById('poll-confirmation');
+    conf.hidden = false;
+    conf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Refresh results
+    renderResults();
   });
 
-  txt += '\n📊 PRIORITIES\n';
-  document.querySelectorAll('#rank-list .rank-item').forEach((item, i) => {
-    txt += `  ${i+1}. ${item.querySelector('.rank-icon').textContent} ${item.querySelector('.rank-label').textContent}\n`;
+  // Reset
+  document.getElementById('poll-reset').addEventListener('click', () => {
+    document.getElementById('poll-confirmation').hidden = true;
+    const form = document.getElementById('poll-form');
+    form.hidden = false;
+    form.reset();
+    document.querySelectorAll('.pill--selected').forEach(p => p.classList.remove('pill--selected'));
+    document.querySelectorAll('#rank-list .rank-item').forEach((item, i) => {
+      item.querySelector('.rank-num').textContent = i + 1;
+    });
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  txt += '\n❓ QUICK QUESTIONS\n';
-  const diet = form.querySelector('input[name="diet"]:checked');
-  txt += `  Diet: ${diet ? diet.value.replace(/_/g, ' ') : '—'}\n`;
-  const local = form.querySelector('input[name="local_food"]:checked');
-  txt += `  Local food: ${local ? local.value.replace(/_/g, ' ') : '—'}\n`;
-
-  const wishlist = form.wishlist.value.trim();
-  const concerns = form.concerns.value.trim();
-  if (wishlist) txt += `\n💡 WISHLIST\n  ${wishlist}\n`;
-  if (concerns) txt += `\n⚠️ CONCERNS\n  ${concerns}\n`;
-
-  // Copy to clipboard
-  navigator.clipboard.writeText(txt).catch(() => {});
-
-  // Show confirmation
-  document.getElementById('poll-output').textContent = txt;
-  form.hidden = true;
-  const conf = document.getElementById('poll-confirmation');
-  conf.hidden = false;
-  conf.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-// Reset
-document.getElementById('poll-reset').addEventListener('click', () => {
-  document.getElementById('poll-confirmation').hidden = true;
-  const form = document.getElementById('poll-form');
-  form.hidden = false;
-  form.reset();
-  document.querySelectorAll('.pill--selected').forEach(p => p.classList.remove('pill--selected'));
-  document.querySelectorAll('#rank-list .rank-item').forEach((item, i) => {
-    item.querySelector('.rank-num').textContent = i + 1;
+  // Toggle results panel
+  document.getElementById('results-toggle').addEventListener('click', function() {
+    const panel = document.getElementById('results-panel');
+    panel.classList.toggle('open');
+    this.classList.toggle('open');
+    this.querySelector('span:first-child').textContent = panel.classList.contains('open') ? 'Hide Results' : 'View Results';
+    if (panel.classList.contains('open')) renderResults();
   });
-  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
+
+  // Render results dashboard
+  function renderResults() {
+    const votes = getVotes();
+    const panel = document.getElementById('results-panel');
+
+    if (votes.length === 0) {
+      panel.innerHTML = '<div class="results-empty">No votes yet. Be the first to vote!</div>';
+      return;
+    }
+
+    const total = votes.length;
+
+    // Tally activity votes
+    function tallyActivities(activities) {
+      return activities.map(a => {
+        const counts = { yes: 0, maybe: 0, skip: 0 };
+        votes.forEach(v => { if (v[a.key] && counts[v[a.key]] !== undefined) counts[v[a.key]]++; });
+        return { ...a, counts };
+      });
+    }
+
+    const budTally = tallyActivities(budActivities);
+    const vieTally = tallyActivities(vieActivities);
+
+    // Build activity rows
+    function buildRows(tally) {
+      return tally.map(a => {
+        const maxBar = 100;
+        const yW = total > 0 ? Math.round((a.counts.yes / total) * maxBar) : 0;
+        const mW = total > 0 ? Math.round((a.counts.maybe / total) * maxBar) : 0;
+        const sW = total > 0 ? Math.round((a.counts.skip / total) * maxBar) : 0;
+        return `<div class="result-row">
+          <span class="result-icon">${a.icon}</span>
+          <span class="result-label">${a.label}</span>
+          <div class="result-bars">
+            <div class="result-bar-group">
+              <span class="result-count result-count--yes">${a.counts.yes}</span>
+              <div class="result-bar result-bar--yes" style="width:${yW}px"></div>
+            </div>
+            <div class="result-bar-group">
+              <span class="result-count result-count--maybe">${a.counts.maybe}</span>
+              <div class="result-bar result-bar--maybe" style="width:${mW}px"></div>
+            </div>
+            <div class="result-bar-group">
+              <span class="result-count result-count--skip">${a.counts.skip}</span>
+              <div class="result-bar result-bar--skip" style="width:${sW}px"></div>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // Tally priorities (lower score = higher priority)
+    const prioScores = {};
+    priorityItems.forEach(p => prioScores[p.key] = 0);
+    votes.forEach(v => {
+      if (v.priorities) {
+        v.priorities.forEach((k, i) => {
+          if (prioScores[k] !== undefined) prioScores[k] += (i + 1);
+        });
+      }
+    });
+    const sortedPrios = priorityItems.slice().sort((a, b) => (prioScores[a.key] || 99) - (prioScores[b.key] || 99));
+
+    // Quick question tallies
+    function tallyField(field) {
+      const counts = {};
+      votes.forEach(v => {
+        const val = v[field];
+        if (val) counts[val] = (counts[val] || 0) + 1;
+      });
+      return Object.entries(counts).map(([k, c]) => `${k.replace(/_/g, ' ')} (${c})`).join(', ') || 'No responses';
+    }
+
+    // Open-ended (anonymous)
+    function collectOpenEnded(field) {
+      return votes.filter(v => v[field]).map((v, i) => 
+        `<div class="open-entry"><span class="open-entry-text">${v[field]}</span></div>`
+      ).join('');
+    }
+
+    let html = '';
+
+    // Voter count (anonymous)
+    html += `<div class="results-voter-count">
+      <strong>${total}</strong> vote${total !== 1 ? 's' : ''} recorded
+    </div>`;
+
+    html += '<div class="results-summary">';
+
+    // Budapest
+    html += '<div class="results-city-header results-city-header--bud">🇭🇺 Budapest</div>';
+    html += `<div class="results-grid">${buildRows(budTally)}</div>`;
+
+    // Vienna
+    html += '<div class="results-city-header results-city-header--vie">🇦🇹 Vienna</div>';
+    html += `<div class="results-grid">${buildRows(vieTally)}</div>`;
+
+    // Priorities
+    html += '<div class="results-priorities"><h4>Avg Priority Ranking</h4>';
+    sortedPrios.forEach((p, i) => {
+      const avg = total > 0 ? (prioScores[p.key] / total).toFixed(1) : '—';
+      html += `<div class="priority-row">
+        <span class="priority-rank">${i+1}</span>
+        <span class="priority-label">${p.icon} ${p.label}</span>
+        <span class="priority-score">avg ${avg}</span>
+      </div>`;
+    });
+    html += '</div>';
+
+    // Quick questions
+    html += '<div class="results-quick"><h4>Quick Questions</h4>';
+    html += `<div class="results-quick-item"><span class="results-quick-label">Diet</span><span class="results-quick-value">${tallyField('diet')}</span></div>`;
+    html += `<div class="results-quick-item"><span class="results-quick-label">Local food</span><span class="results-quick-value">${tallyField('local_food')}</span></div>`;
+    html += '</div>';
+
+    // Open-ended
+    const wishlists = collectOpenEnded('wishlist');
+    const concernsList = collectOpenEnded('concerns');
+    if (wishlists) {
+      html += `<div class="results-open-ended"><h4>💡 Wishlists</h4>${wishlists}</div>`;
+    }
+    if (concernsList) {
+      html += `<div class="results-open-ended"><h4>⚠️ Concerns</h4>${concernsList}</div>`;
+    }
+
+    html += '</div>'; // end results-summary
+
+    // Clear button
+    html += '<div style="text-align:center"><button type="button" class="results-clear" id="results-clear">Clear All Votes</button></div>';
+
+    panel.innerHTML = html;
+
+    // Clear handler
+    document.getElementById('results-clear').addEventListener('click', () => {
+      if (confirm('Delete all saved votes? This cannot be undone.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderResults();
+      }
+    });
+  }
+
+  // Auto-show results if votes exist
+  if (getVotes().length > 0) {
+    const toggle = document.getElementById('results-toggle');
+    const countBadge = document.createElement('span');
+    countBadge.style.cssText = 'background:var(--color-primary);color:#fff;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-left:4px;';
+    countBadge.textContent = getVotes().length;
+    toggle.insertBefore(countBadge, toggle.querySelector('.arrow'));
+  }
+})();
 
 // ===== MENU MODAL =====
 (function() {

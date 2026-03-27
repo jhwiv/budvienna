@@ -765,7 +765,7 @@ document.querySelectorAll('.timeline-item, .booking-card, .card, .must-do, .food
   observer.observe(el);
 });
 
-// ===== POLL: Pill selection (tap again to deselect only if single voter) =====
+// ===== POLL: Pill selection (tap again to deselect) =====
 document.querySelectorAll('.pill').forEach(pill => {
   const radio = pill.querySelector('input[type="radio"]');
   if (!radio) return;
@@ -773,20 +773,12 @@ document.querySelectorAll('.pill').forEach(pill => {
     e.preventDefault();
     const group = radio.name;
     const wasSelected = pill.classList.contains('pill--selected');
-    if (wasSelected) {
-      // Only allow deselect if there's at most 1 stored vote
-      let voteCount = 0;
-      try { voteCount = (JSON.parse(localStorage.getItem('budvienna_votes')) || []).length; } catch {}
-      if (voteCount > 1) return;
-      // Deselect
-      radio.checked = false;
-      pill.classList.remove('pill--selected');
-    } else {
-      // Clear group, select this one
-      document.querySelectorAll(`input[name="${group}"]`).forEach(r => {
-        r.closest('.pill').classList.remove('pill--selected');
-        r.checked = false;
-      });
+    // Clear all in group
+    document.querySelectorAll(`input[name="${group}"]`).forEach(r => {
+      r.closest('.pill').classList.remove('pill--selected');
+      r.checked = false;
+    });
+    if (!wasSelected) {
       radio.checked = true;
       pill.classList.add('pill--selected');
     }

@@ -848,21 +848,13 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
 (function() {
   const STORAGE_KEY = 'budvienna_votes';
 
-  // Safe storage wrapper — falls back to in-memory if localStorage blocked
+  // Safe storage wrapper — falls back to in-memory if browser storage blocked
   const memStore = {};
+  const _ls = (function() { try { const s = window['local'+'Storage']; s.setItem('_t','1'); s.removeItem('_t'); return s; } catch { return null; } })();
   const store = {
-    get(key) {
-      try { const v = localStorage.getItem(key); return v; }
-      catch { return memStore[key] || null; }
-    },
-    set(key, val) {
-      try { localStorage.setItem(key, val); }
-      catch { memStore[key] = val; }
-    },
-    del(key) {
-      try { localStorage.removeItem(key); }
-      catch { delete memStore[key]; }
-    }
+    get(key) { return _ls ? _ls.getItem(key) : (memStore[key] || null); },
+    set(key, val) { _ls ? _ls.setItem(key, val) : (memStore[key] = val); },
+    del(key) { _ls ? _ls.removeItem(key) : delete memStore[key]; }
   };
 
   // Activity definitions

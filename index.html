@@ -294,28 +294,28 @@
       <div class="food-category">
         <h4>Brunch</h4>
         <ul>
-          <li>Cirkusz <span class="price">~€8</span></li>
-          <li>My Little Melbourne <span class="price">~€7</span></li>
-          <li>Café Gerbeaud <span class="price">~€14</span></li>
+          <li data-menu="cirkusz">Cirkusz <span class="price">~€8</span></li>
+          <li data-menu="mlm">My Little Melbourne <span class="price">~€7</span></li>
+          <li data-menu="gerbeaud">Café Gerbeaud <span class="price">~€14</span></li>
         </ul>
       </div>
       <div class="food-category">
         <h4>Dinner</h4>
         <ul>
-          <li>Menza (retro Hungarian) <span class="price">€8</span></li>
-          <li>Bors GasztroBar (soups) <span class="price">€4</span></li>
-          <li>Drum Café (Asian) <span class="price">€9</span></li>
-          <li>Két Szerecsen <span class="price">€10</span></li>
+          <li data-menu="menza">Menza (retro Hungarian) <span class="price">€8</span></li>
+          <li data-menu="bors">Bors GasztroBar (soups) <span class="price">€4</span></li>
+          <li data-menu="drum">Drum Café (Hungarian) <span class="price">€9</span></li>
+          <li data-menu="ket">Két Szerecsen <span class="price">€10</span></li>
         </ul>
       </div>
       <div class="food-category">
         <h4>Bars</h4>
         <ul>
-          <li>Szimpla Kert</li>
-          <li>Instant-Fogas</li>
-          <li>Boutiq'Bar (cocktails) <span class="price">€7</span></li>
-          <li>Doboz</li>
-          <li>Élesztő</li>
+          <li data-no-menu>Szimpla Kert</li>
+          <li data-no-menu>Instant-Fogas</li>
+          <li data-no-menu>Boutiq'Bar (cocktails) <span class="price">€7</span></li>
+          <li data-no-menu>Doboz</li>
+          <li data-no-menu>Élesztő</li>
         </ul>
       </div>
     </div>
@@ -373,28 +373,28 @@
       <div class="food-category">
         <h4>Brunch</h4>
         <ul>
-          <li>Café Central <span class="price">~€16</span></li>
-          <li>Ramasuri (7th dist) <span class="price">~€11</span></li>
-          <li>Café Sperl <span class="price">~€10</span></li>
-          <li>Motto am Fluss <span class="price">~€14</span></li>
+          <li data-menu="central">Café Central <span class="price">~€16</span></li>
+          <li data-menu="ramasuri">Ramasuri (2nd dist) <span class="price">~€11</span></li>
+          <li data-menu="sperl">Café Sperl <span class="price">~€10</span></li>
+          <li data-menu="motto">Motto am Fluss <span class="price">~€14</span></li>
         </ul>
       </div>
       <div class="food-category">
         <h4>Dinner</h4>
         <ul>
-          <li>Bitzinger sausage stand <span class="price">€6</span></li>
-          <li>NENI <span class="price">€13</span></li>
-          <li>Figlmüller schnitzel <span class="price">€16</span></li>
-          <li>Swing Kitchen vegan <span class="price">€10</span></li>
+          <li data-menu="bitzinger">Bitzinger sausage stand <span class="price">€6</span></li>
+          <li data-menu="neni">NENI <span class="price">€13</span></li>
+          <li data-menu="figlmuller">Figlmüller schnitzel <span class="price">€16</span></li>
+          <li data-menu="swing">Swing Kitchen vegan <span class="price">€10</span></li>
         </ul>
       </div>
       <div class="food-category">
         <h4>Bars & Nightlife</h4>
         <ul>
-          <li>Danube Canal bars</li>
-          <li>Volksgarten Club (Sat)</li>
-          <li>Bermuda Triangle bar-hop</li>
-          <li>Flex (electronic)</li>
+          <li data-no-menu>Danube Canal bars</li>
+          <li data-no-menu>Volksgarten Club (Sat)</li>
+          <li data-no-menu>Bermuda Triangle bar-hop</li>
+          <li data-no-menu>Flex (electronic)</li>
         </ul>
       </div>
     </div>
@@ -685,6 +685,19 @@
   </div>
 </section>
 
+<!-- MENU MODAL -->
+<div class="menu-modal-overlay" id="menu-modal-overlay">
+  <div class="menu-modal" id="menu-modal">
+    <div class="menu-modal-header">
+      <h3 id="menu-modal-name"></h3>
+      <button class="menu-modal-close" id="menu-modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="menu-modal-meta" id="menu-modal-meta"></div>
+    <div class="menu-modal-body" id="menu-modal-body"></div>
+    <div class="menu-modal-tip" id="menu-modal-tip"></div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container footer-inner">
@@ -899,6 +912,478 @@ document.getElementById('poll-reset').addEventListener('click', () => {
   });
   form.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+
+// ===== MENU MODAL =====
+(function() {
+  const menuData = {
+    // --- BUDAPEST BRUNCH ---
+    cirkusz: {
+      name: 'Cirkusz',
+      city: 'Budapest',
+      type: 'Brunch / All-Day Breakfast',
+      price: '$$',
+      address: 'Dob u. 25, District VII',
+      hours: '7:30 AM – 4 PM daily',
+      desc: 'Trendy Jewish Quarter brunch spot with champion baristas and a broad menu of sweet and savoury options. Relaxed, sharing-table vibe. One of the best brunch spots in the city.',
+      sections: [
+        { title: 'Highlights', dishes: [
+          { name: 'Eggs Benedict', price: '~€8' },
+          { name: 'Turkish Eggs', price: '~€7' },
+          { name: 'French Toast', price: '~€8' },
+          { name: 'Pulled Pork Plate', price: '~€9' },
+          { name: 'Salmon & Guacamole', price: '~€10' },
+          { name: 'Fruit Bowl', price: '~€7' },
+        ]},
+        { title: 'Drinks', dishes: [
+          { name: 'Specialty Coffee / Latte', price: '~€3' },
+          { name: 'Fresh Juice', price: '~€4' },
+          { name: 'Brunch Cocktail', price: '~€6' },
+        ]}
+      ],
+      tip: 'Tables fill fast — arrive early or be prepared to share. Less than €15 pp for a full brunch.'
+    },
+    mlm: {
+      name: 'My Little Melbourne',
+      city: 'Budapest',
+      type: 'Specialty Coffee & Breakfast',
+      price: '$–$$',
+      address: 'Madách Imre út 3, District VII',
+      hours: '7 AM – 7 PM (8 AM weekends)',
+      desc: 'Pioneer specialty coffee shop in Budapest. Espresso & brew bar with Aussie-style breakfast. Clean, light-roasted coffees with clear origins. Also runs a barista school downstairs.',
+      sections: [
+        { title: 'Highlights', dishes: [
+          { name: 'Avocado Toast', price: '~€6' },
+          { name: 'Granola Bowl', price: '~€5' },
+          { name: 'Breakfast Sandwich', price: '~€6' },
+          { name: 'Pastries & Cakes', price: '~€3–5' },
+        ]},
+        { title: 'Coffee', dishes: [
+          { name: 'Flat White / Cappuccino', price: '~€3' },
+          { name: 'Filter Coffee (V60 / Aeropress)', price: '~€3.50' },
+          { name: 'Espresso', price: '~€2' },
+        ]}
+      ],
+      tip: 'Best coffee in Budapest by many accounts. Small space — grab a seat outside in good weather.'
+    },
+    gerbeaud: {
+      name: 'Café Gerbeaud',
+      city: 'Budapest',
+      type: 'Historic Coffeehouse & Patisserie',
+      price: '$$$',
+      address: 'Vörösmarty tér 7, District V',
+      hours: '9 AM – 9 PM daily',
+      desc: 'Budapest\'s most famous coffeehouse, on Vörösmarty Square since 1858. Ornate interiors, handmade pastries without additives, and a full brunch/lunch menu. 15% service charge added.',
+      sections: [
+        { title: 'Pastries', dishes: [
+          { name: 'Croissant', price: '~€6' },
+          { name: 'Pain au Chocolat', price: '~€7.50' },
+          { name: 'Walnut / Poppy Seed Crescent', price: '~€8' },
+          { name: 'New York Roll', price: '~€9' },
+        ]},
+        { title: 'Breakfast & Mains', dishes: [
+          { name: 'Gerbeaud Breakfast', price: '~€14' },
+          { name: 'Eggs Benedict', price: '~€12' },
+          { name: 'Hungarian Goulash', price: '~€14' },
+        ]},
+        { title: 'Famous Cakes', dishes: [
+          { name: 'Gerbeaud Classic Cake Selection', price: '~€25' },
+          { name: 'Individual Cake Slice', price: '~€8–10' },
+        ]}
+      ],
+      tip: 'It\'s a splurge — come for the experience and the pastries. The terrace on the square is lovely.'
+    },
+    // --- BUDAPEST DINNER ---
+    menza: {
+      name: 'Menza Étterem',
+      city: 'Budapest',
+      type: 'Retro Hungarian Bistro',
+      price: '$$',
+      address: 'Liszt Ferenc tér 2, District VI',
+      hours: '10 AM – midnight daily',
+      desc: 'Retro-styled restaurant on the lively Liszt Ferenc Square, serving updated Hungarian classics and international dishes. Excellent value for the location. Popular with locals and visitors alike.',
+      sections: [
+        { title: 'Starters', dishes: [
+          { name: 'Menza Appetizer for 2 (duck rillette, mangalica charcuterie)', price: '~€15' },
+          { name: 'Egg Benedict w/ Smoked Trout', price: '~€11' },
+          { name: 'Vegan Caesar Salad', price: '~€9.50' },
+        ]},
+        { title: 'Mains', dishes: [
+          { name: 'Chicken Paprikash w/ Spaetzle', price: '~€12.50' },
+          { name: 'Breaded Mangalica Pork Chop', price: '~€16' },
+          { name: 'Crispy Duck Leg w/ Truffle Cauliflower', price: '~€15' },
+          { name: 'Vegan Cauliflower Tikka Masala', price: '~€10' },
+        ]},
+        { title: 'Soups', dishes: [
+          { name: 'Hungarian Goulash', price: '~€8' },
+          { name: 'Veal Ragout Soup', price: '~€8' },
+        ]}
+      ],
+      tip: 'A solid dinner for two with drinks comes to ~€40. Try the duck or the chicken paprikash.'
+    },
+    bors: {
+      name: 'Bors GasztroBar',
+      city: 'Budapest',
+      type: 'Gourmet Street Food',
+      price: '$',
+      address: 'Kazinczy u. 10, District VII',
+      hours: '11:30 AM – 9 PM (closed Sun)',
+      desc: 'Cult-favourite tiny spot in the Jewish Quarter famous for creative soups in paper cups and loaded baguettes. Menu changes daily. Star Wars decor. Expect a queue at lunch — it\'s worth the wait.',
+      sections: [
+        { title: 'Soups (daily rotation)', dishes: [
+          { name: 'Gourmet Cream Soup of the Day', price: '~€5' },
+          { name: 'Spicy Mexican Stew Soup', price: '~€5' },
+          { name: 'Caramel Hazelnut Dessert Soup', price: '~€5' },
+        ]},
+        { title: 'Baguettes', dishes: [
+          { name: 'Pulled Pork Baguette', price: '~€9.50' },
+          { name: 'French Lady (chicken, raspberry jam, cheese)', price: '~€9.50' },
+          { name: 'Texas BBQ (beef ragu, grilled cheese)', price: '~€9.50' },
+          { name: 'Vegan Herbivore (tofu, lentil cream)', price: '~€9.50' },
+        ]},
+        { title: 'Also', dishes: [
+          { name: 'Caesar Salad / Chimichurri Salad', price: '~€10' },
+          { name: 'Carbonara / Thai Fusion Pasta', price: '~€10' },
+        ]}
+      ],
+      tip: 'Cash or card. Go off-peak (after 2 PM) to skip the queue. Their soups are legendary.'
+    },
+    drum: {
+      name: 'Drum Café',
+      city: 'Budapest',
+      type: 'Hungarian Comfort Food',
+      price: '$',
+      address: 'Dob u. 2, District VII',
+      hours: '9 AM – midnight daily',
+      desc: 'Cheerful, budget-friendly spot in the Jewish Quarter serving huge portions of classic Hungarian food. Known for their goulash, lángos, and set menus. Eclectic decor, lively atmosphere. Two floors.',
+      sections: [
+        { title: 'Must-Try', dishes: [
+          { name: 'Goulash Soup with Bread', price: '~€4' },
+          { name: 'Lángos (cheese & sour cream)', price: '~€4' },
+          { name: 'Chicken Paprikash in Bread Bowl', price: '~€9' },
+        ]},
+        { title: 'Mains', dishes: [
+          { name: 'Pork Stew in Bread Loaf', price: '~€9' },
+          { name: 'Hungarian Set Menu (soup + main + dessert)', price: '~€9' },
+          { name: 'Goulash Pizza', price: '~€8' },
+        ]},
+        { title: 'Drinks', dishes: [
+          { name: 'House Wine (large)', price: '~€2' },
+          { name: 'Beer (0.5L)', price: '~€2.50' },
+          { name: 'Coffee', price: '~€1.50' },
+        ]}
+      ],
+      tip: 'Incredibly cheap — dinner for two with beers is ~€14. Don\'t miss the goulash or the lángos.'
+    },
+    ket: {
+      name: 'Két Szerecsen',
+      city: 'Budapest',
+      type: 'Bistro & Coffeehouse',
+      price: '$$',
+      address: 'Nagymező u. 14, District VI',
+      hours: '8:30 AM – 11:30 PM daily',
+      desc: 'A quarter-century of Parisian bistro culture in Budapest\'s downtown. All-day dining from brunch through dinner. Mix of Hungarian classics and international dishes. Terrace seating on the "Broadway of Budapest."',
+      sections: [
+        { title: 'Starters & Salads', dishes: [
+          { name: 'Aubergine Spread w/ Flatbread', price: '~€11' },
+          { name: 'Caesar Salad w/ Chicken', price: '~€16' },
+          { name: 'Burrata w/ Tomato Bruschetta', price: '~€19' },
+        ]},
+        { title: 'Mains', dishes: [
+          { name: 'Chicken Paprikash w/ Dumplings', price: '~€19' },
+          { name: 'Duck Leg Confit w/ Red Cabbage', price: '~€23' },
+          { name: 'Beef Goulash w/ Pinch Pasta', price: '~€13' },
+          { name: 'Thai Green Curry (chicken)', price: '~€23' },
+          { name: 'Salmon w/ Lemon Butter', price: '~€28' },
+        ]},
+        { title: 'Daily Menu (weekdays)', dishes: [
+          { name: 'Soup + Main Course', price: '~€14' },
+        ]}
+      ],
+      tip: 'The weekday daily menu (soup + main for ~€14) is a great deal. Good for a nicer dinner out.'
+    },
+    // --- VIENNA BRUNCH ---
+    central: {
+      name: 'Café Central',
+      city: 'Vienna',
+      type: 'Historic Viennese Coffeehouse',
+      price: '$$$',
+      address: 'Herrengasse 14, 1st District',
+      hours: '10 AM – 10 PM daily',
+      desc: 'One of the world\'s most famous coffeehouses, in the Palais Ferstel since 1876. Grand vaulted ceilings, live piano, and classic Viennese cuisine. Where Freud, Trotsky, and Schnitzler once sat.',
+      sections: [
+        { title: 'Coffee & Classics', dishes: [
+          { name: 'Wiener Melange (Viennese cappuccino)', price: '~€7' },
+          { name: 'Apfelstrudel (warm, with cream)', price: '~€9' },
+          { name: 'Sachertorte Slice', price: '~€8' },
+        ]},
+        { title: 'Breakfast', dishes: [
+          { name: 'Viennese Breakfast (eggs, rolls, jam, ham)', price: '~€16' },
+          { name: 'Eggs Benedict', price: '~€15' },
+          { name: 'Smoked Salmon Plate', price: '~€18' },
+        ]},
+        { title: 'Mains', dishes: [
+          { name: 'Wiener Schnitzel', price: '~€28' },
+          { name: 'Tafelspitz (boiled beef)', price: '~€26' },
+          { name: 'Goulash', price: '~€18' },
+        ]}
+      ],
+      tip: 'Note: Café Central closes for renovation from March 16, 2026. Check before visiting. Come for coffee + cake as a treat, mains are pricey.'
+    },
+    ramasuri: {
+      name: 'Ramasuri',
+      city: 'Vienna',
+      type: 'Modern Brunch Café & Bar',
+      price: '$$',
+      address: 'Praterstraße 1, 2nd District',
+      hours: '8 AM – midnight daily',
+      desc: 'Buzzy all-day café near the Prater with an excellent brunch menu, creative cocktails, and a cool crowd. Vegan/veggie-friendly, with everything from omelettes to tartare to bar snacks at night.',
+      sections: [
+        { title: 'Brunch', dishes: [
+          { name: 'Ramasuri Combo (ham, cheese, scrambled egg, porridge, bread)', price: '€15.50' },
+          { name: 'Poached Eggs Benedict / Florentina / Royal', price: '€13.90–15.90' },
+          { name: 'Spicy Chorizo Omelette w/ Avocado', price: '€14.50' },
+          { name: 'Avocado Smoked Salmon Toast', price: '€13.90' },
+          { name: 'Blueberry Pancakes', price: '€10.50' },
+        ]},
+        { title: 'Mains', dishes: [
+          { name: 'BBQ Pulled Chicken w/ Fries', price: '€17.50' },
+          { name: 'Backhendl (Fried Chicken)', price: '€17.50' },
+          { name: 'Paprika Gnocchi', price: '€16.90' },
+          { name: 'Beef Tartare à la Ramasuri', price: '€16.50' },
+        ]}
+      ],
+      tip: 'Reservations recommended for brunch — it gets packed. Great lunch menu deal Mon–Fri.'
+    },
+    sperl: {
+      name: 'Café Sperl',
+      city: 'Vienna',
+      type: 'Traditional Viennese Coffeehouse',
+      price: '$$',
+      address: 'Gumpendorfer Str. 11, 6th District',
+      hours: 'Mon–Sat 7 AM – 10 PM, Sun 10 AM – 8 PM',
+      desc: 'Old-world Viennese coffeehouse since 1880 with original wood-paneled interiors, billiard tables, and newspapers on wooden sticks. Beloved by locals. More authentic and less touristy than Café Central.',
+      sections: [
+        { title: 'Classics', dishes: [
+          { name: 'Wiener Melange', price: '~€5.50' },
+          { name: 'Einspänner (espresso with cream)', price: '~€5.50' },
+          { name: 'Apfelstrudel', price: '~€6' },
+        ]},
+        { title: 'Food', dishes: [
+          { name: 'Viennese Breakfast', price: '~€10' },
+          { name: 'Gulasch', price: '~€12' },
+          { name: 'Wiener Schnitzel', price: '~€16' },
+          { name: 'Kaiserschmarrn (shredded pancake)', price: '~€11' },
+        ]}
+      ],
+      tip: 'A quieter, more local experience than Central. Perfect for a lazy coffee and newspaper read.'
+    },
+    motto: {
+      name: 'Motto am Fluss',
+      city: 'Vienna',
+      type: 'Café & Restaurant on the Danube Canal',
+      price: '$$–$$$',
+      address: 'Schwedenplatz, Franz-Josefs-Kai 2',
+      hours: 'Café 8 AM – midnight / Restaurant 6 PM – midnight',
+      desc: 'Sleek glass-fronted spot on a boat dock along the Danube Canal. Two levels: casual café (brunch, bowls, burgers) and upstairs restaurant (fine dining, cocktail bar). Great views.',
+      sections: [
+        { title: 'Café Brunch', dishes: [
+          { name: 'Heimathafen (soft egg, croissant, jam, butter)', price: '~€12' },
+          { name: 'Motto Egg Benedict w/ Mushrooms', price: '~€14' },
+          { name: 'Açaí Bowl', price: '~€13' },
+        ]},
+        { title: 'Café Mains', dishes: [
+          { name: 'Motto Burger w/ Cheddar & Bacon', price: '~€17' },
+          { name: 'Motto Bowl (wakame, edamame, rice)', price: '~€15' },
+          { name: 'Gnocchi w/ Mushrooms & Grana', price: '~€15' },
+        ]},
+        { title: 'Desserts', dishes: [
+          { name: 'Brownie w/ Mascarpone', price: '€3.70' },
+          { name: 'Carrot Cake', price: '€4.60' },
+        ]}
+      ],
+      tip: 'The canal-side terrace is the draw. Café prices are fair; restaurant upstairs is $$$.'
+    },
+    // --- VIENNA DINNER ---
+    bitzinger: {
+      name: 'Bitzinger Würstelstand',
+      city: 'Vienna',
+      type: 'Legendary Sausage Stand',
+      price: '$',
+      address: 'Albertinaplatz 1, 1st District',
+      hours: '8 AM – 4 AM daily',
+      desc: 'Vienna\'s most famous sausage stand, right behind the Opera House. Opera-goers in gowns eating sausages next to backpackers — a true Viennese experience. Also sells champagne by the bottle.',
+      sections: [
+        { title: 'Sausages', dishes: [
+          { name: 'Käsekrainer (cheese-stuffed sausage)', price: '~€5.50' },
+          { name: 'Bosna (bratwurst in a roll w/ curry & onions)', price: '~€5' },
+          { name: 'Sacherwürstel (Bitzinger signature)', price: '~€5' },
+          { name: 'Currywurst', price: '~€6' },
+          { name: 'Waldviertler (smoked sausage)', price: '~€5.50' },
+        ]},
+        { title: 'Drinks', dishes: [
+          { name: 'Beer', price: '~€4' },
+          { name: 'Champagne (bottle)', price: '~€40+' },
+        ]}
+      ],
+      tip: 'The Käsekrainer is the quintessential order. Open until 4 AM — perfect after a night out.'
+    },
+    neni: {
+      name: 'NENI am Naschmarkt',
+      city: 'Vienna',
+      type: 'Israeli / Middle Eastern',
+      price: '$$',
+      address: 'Naschmarkt Stand 510, 6th District',
+      hours: '8 AM – 11 PM daily',
+      desc: 'Family-run Israeli-inspired restaurant right on the Naschmarkt. Vibrant sharing plates, fresh pita, and Middle Eastern flavours. Great breakfast and mezze. The "Balagan" sharing menu is popular for groups.',
+      sections: [
+        { title: 'Mezze & Starters', dishes: [
+          { name: 'NENI Homemade Hummus', price: '€7' },
+          { name: 'Falafel Plate', price: '€8' },
+          { name: 'Grilled Eggplant (Melanzani)', price: '€12' },
+          { name: 'Sabich Plate (eggplant, egg, hummus, falafel)', price: '€13' },
+        ]},
+        { title: 'Mains', dishes: [
+          { name: 'Jerusalem Teller', price: '~€16' },
+          { name: 'Lamb Patties w/ Fresh Pita', price: '~€18' },
+          { name: 'Chicken Shawarma Plate', price: '~€17' },
+          { name: 'Grilled Beef Skewer', price: '~€27' },
+        ]},
+        { title: 'Breakfast', dishes: [
+          { name: 'Israeli Breakfast (labneh, eggs, olives, pita)', price: '€15.50' },
+          { name: 'Avocado Toast w/ Beet Hummus', price: '€15.50' },
+        ]}
+      ],
+      tip: 'Great for a Naschmarkt lunch. The Sabich plate is the best value. Go before noon to avoid the wait.'
+    },
+    figlmuller: {
+      name: 'Figlmüller',
+      city: 'Vienna',
+      type: 'Viennese Schnitzel Institution',
+      price: '$$–$$$',
+      address: 'Bäckerstraße 6, 1st District (also Wollzeile)',
+      hours: '11 AM – 10:30 PM daily',
+      desc: 'The schnitzel restaurant since 1905. Their signature plate-sized pork schnitzel is a rite of passage in Vienna. Traditional Viennese menu in a cozy, wood-paneled dining room.',
+      sections: [
+        { title: 'Signature', dishes: [
+          { name: 'Figlmüller Schnitzel (pork, original since 1905)', price: '€21.90' },
+          { name: 'Wiener Schnitzel (veal)', price: '€28.90' },
+          { name: 'Chicken Cordon Bleu', price: '€21.50' },
+        ]},
+        { title: 'Other Mains', dishes: [
+          { name: 'Viennese Tafelspitz (boiled beef in pot)', price: '€28.50' },
+          { name: 'Creamy Veal Goulash w/ Spaetzle', price: '€21.50' },
+          { name: 'Sirloin Steak w/ Onions & Fried Potatoes', price: '€27.90' },
+          { name: 'Spinach Dumplings w/ Brown Butter', price: '€15.90' },
+          { name: 'Planted Vegan Schnitzel (pea protein)', price: '€22.50' },
+        ]},
+        { title: 'Starters', dishes: [
+          { name: 'Clear Beef Broth w/ Semolina Dumpling', price: '€6.90' },
+          { name: 'Beef Tartare', price: '€20.50' },
+          { name: 'Baby Spinach Salad w/ Pear & Walnut', price: '€16.50' },
+        ]}
+      ],
+      tip: 'Reserve ahead — it\'s always busy. The €21.90 pork schnitzel is the move. They have a vegan option too.'
+    },
+    swing: {
+      name: 'Swing Kitchen',
+      city: 'Vienna',
+      type: '100% Vegan Fast Food',
+      price: '$',
+      address: 'Operngasse 24, 4th District (+ other locations)',
+      hours: '11 AM – 10 PM daily',
+      desc: 'Award-winning 100% plant-based burger chain that tastes so good you won\'t believe it\'s vegan. Burgers, wraps, nuggets, and sweet potato fries. Free drink refills with combos. Ceramic mugs add a nice touch.',
+      sections: [
+        { title: 'Burgers', dishes: [
+          { name: 'Swing Burger', price: '~€8' },
+          { name: 'Cheeseburger', price: '~€9' },
+          { name: 'Spicy Chilli Burger', price: '~€9' },
+          { name: 'Vienna Burger (schnitzel-style)', price: '~€9' },
+        ]},
+        { title: 'Combos & Sides', dishes: [
+          { name: 'Burger + Fries + Drink Combo', price: '~€12' },
+          { name: 'Nuggets (6 pcs)', price: '~€6' },
+          { name: 'Sweet Potato Fries', price: '~€4' },
+        ]},
+        { title: 'Wraps', dishes: [
+          { name: 'Classic Wrap', price: '~€8' },
+          { name: 'Crispy Chicken-Style Wrap', price: '~€9' },
+        ]}
+      ],
+      tip: 'Great quick lunch. Free refills on drinks with any combo menu. Multiple locations across Vienna.'
+    }
+  };
+
+  // Build & show modal
+  const overlay = document.getElementById('menu-modal-overlay');
+  const modal = document.getElementById('menu-modal');
+  const modalName = document.getElementById('menu-modal-name');
+  const modalMeta = document.getElementById('menu-modal-meta');
+  const modalBody = document.getElementById('menu-modal-body');
+  const modalTip = document.getElementById('menu-modal-tip');
+  const closeBtn = document.getElementById('menu-modal-close');
+
+  function openMenu(key) {
+    const data = menuData[key];
+    if (!data) return;
+
+    modalName.textContent = data.name;
+
+    // Meta row
+    let meta = '';
+    if (data.type) meta += `<span>${data.type}</span>`;
+    if (data.price) meta += `<span>${data.price}</span>`;
+    if (data.address) meta += `<span>📍 ${data.address}</span>`;
+    if (data.hours) meta += `<span>🕐 ${data.hours}</span>`;
+    modalMeta.innerHTML = meta;
+
+    // Body
+    let body = '';
+    if (data.desc) body += `<p>${data.desc}</p>`;
+    if (data.sections) {
+      data.sections.forEach(sec => {
+        body += `<div class="menu-section">`;
+        body += `<div class="menu-section-title">${sec.title}</div>`;
+        sec.dishes.forEach(d => {
+          body += `<div class="menu-dish">`;
+          body += `<span class="menu-dish-name">${d.name}</span>`;
+          if (d.price) body += `<span class="menu-dish-price">${d.price}</span>`;
+          body += `</div>`;
+        });
+        body += `</div>`;
+      });
+    }
+    modalBody.innerHTML = body;
+
+    // Tip
+    modalTip.textContent = data.tip || '';
+    modalTip.style.display = data.tip ? '' : 'none';
+
+    overlay.classList.add('menu-modal--open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    overlay.classList.remove('menu-modal--open');
+    document.body.style.overflow = '';
+  }
+
+  // Click handlers on restaurant items
+  document.querySelectorAll('[data-menu]').forEach(li => {
+    li.addEventListener('click', (e) => {
+      e.preventDefault();
+      openMenu(li.dataset.menu);
+    });
+  });
+
+  // Close modal
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
 </script>
 
 </body>

@@ -848,6 +848,23 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
 (function() {
   const STORAGE_KEY = 'budvienna_votes';
 
+  // Safe storage wrapper — falls back to in-memory if localStorage blocked
+  const memStore = {};
+  const store = {
+    get(key) {
+      try { const v = localStorage.getItem(key); return v; }
+      catch { return memStore[key] || null; }
+    },
+    set(key, val) {
+      try { localStorage.setItem(key, val); }
+      catch { memStore[key] = val; }
+    },
+    del(key) {
+      try { localStorage.removeItem(key); }
+      catch { delete memStore[key]; }
+    }
+  };
+
   // Activity definitions
   const budActivities = [
     { key: 'bud_prosecco', icon: '🥂', label: 'Prosecco Cruise' },
@@ -879,11 +896,11 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
   ];
 
   function getVotes() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    try { return JSON.parse(store.get(STORAGE_KEY)) || []; }
     catch { return []; }
   }
   function saveVotes(votes) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
+    store.set(STORAGE_KEY, JSON.stringify(votes));
   }
 
   // Build clipboard text
@@ -1115,7 +1132,7 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
     // Clear handler
     document.getElementById('results-clear').addEventListener('click', () => {
       if (confirm('Delete all saved votes? This cannot be undone.')) {
-        localStorage.removeItem(STORAGE_KEY);
+        store.del(STORAGE_KEY);
         renderResults();
       }
     });

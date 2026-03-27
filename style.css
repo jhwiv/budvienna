@@ -189,6 +189,45 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
     linear-gradient(135deg, #fdf0dd 0%, #f5eadb 30%, #ece0d5 60%, #e8ddd6 100%);
 }
 .hero-content { max-width: 700px; }
+/* Hero logo lockup */
+.hero-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+.hero-logo {
+  width: clamp(140px, 20vw, 220px);
+  height: auto;
+  display: block;
+}
+.hero-logo-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+.hero-logo-text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #006A52;
+}
+
+@media (max-width: 480px) {
+  .hero-logo-wrap {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .hero-logo-divider {
+    width: 40px;
+    height: 1px;
+  }
+}
+
 .hero-tag {
   font-family: var(--font-body);
   font-weight: 500;

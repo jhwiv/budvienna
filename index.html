@@ -37,6 +37,7 @@
       <a href="#bookings">Bookings</a>
       <a href="#budapest">Budapest</a>
       <a href="#vienna">Vienna</a>
+      <a href="#vote">Vote</a>
     </nav>
     <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -47,7 +48,11 @@
 <!-- HERO -->
 <section class="hero" id="overview">
   <div class="hero-content">
-    <p class="hero-tag">Spring 2026</p>
+    <div class="hero-logo-wrap">
+      <img src="./assets/skidmore-logo.png" alt="Skidmore College" class="hero-logo">
+      <span class="hero-logo-divider"></span>
+      <span class="hero-logo-text">Spring Break 2026</span>
+    </div>
     <h1 class="hero-title">Budapest<br>&amp; Vienna</h1>
     <p class="hero-subtitle">Tue Mar 31 → Mon Apr 6</p>
     <div class="hero-people">
@@ -399,6 +404,289 @@
   </div>
 </section>
 
+<!-- VOTE / POLL -->
+<section class="section" id="vote">
+  <div class="container">
+    <h2 class="section-title">Your Votes</h2>
+    <p class="poll-intro">Fill this in so we can plan around everyone's interests. Pick one per activity, rank your priorities, and answer the quick questions.</p>
+
+    <form id="poll-form" class="poll-form">
+
+      <!-- Name -->
+      <div class="poll-name-wrap">
+        <label for="voter-name" class="poll-label">Your Name</label>
+        <input type="text" id="voter-name" name="voter_name" class="poll-input" placeholder="e.g. Charlotte" required>
+      </div>
+
+      <!-- BUDAPEST ACTIVITIES -->
+      <div class="poll-block">
+        <div class="poll-block-header poll-block-header--bud">Budapest Activities</div>
+        <p class="poll-block-sub">Yes / Maybe / Skip</p>
+        <div class="poll-items">
+          <div class="poll-item" data-activity="prosecco_cruise">
+            <span class="poll-item-icon">🥂</span>
+            <span class="poll-item-label">Prosecco Sunset Cruise</span>
+            <span class="poll-item-tag">Must-Do</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_prosecco" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_prosecco" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_prosecco" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">♨️</span>
+            <span class="poll-item-label">Széchenyi Thermal Baths</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_baths" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_baths" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_baths" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🍻</span>
+            <span class="poll-item-label">Szimpla Kert (ruin bar)</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_szimpla" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_szimpla" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_szimpla" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🏰</span>
+            <span class="poll-item-label">Buda Castle & Fisherman's Bastion</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_castle" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_castle" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_castle" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🌅</span>
+            <span class="poll-item-label">Gellért Hill sunset</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_gellert" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_gellert" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_gellert" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🏛️</span>
+            <span class="poll-item-label">Parliament tour</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_parliament" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_parliament" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_parliament" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🛒</span>
+            <span class="poll-item-label">Central Market Hall</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_market" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_market" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_market" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🌉</span>
+            <span class="poll-item-label">Danube night walk</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_danube" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_danube" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_danube" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🏰</span>
+            <span class="poll-item-label">Vajdahunyad Castle (fairy-tale castle in City Park)</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_vajda" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_vajda" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_vajda" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🐾</span>
+            <span class="poll-item-label">Zoo Café (coffee + exotic animals)</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="bud_zoo" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="bud_zoo" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="bud_zoo" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIENNA ACTIVITIES -->
+      <div class="poll-block">
+        <div class="poll-block-header poll-block-header--vie">Vienna Activities</div>
+        <p class="poll-block-sub">Yes / Maybe / Skip</p>
+        <div class="poll-items">
+          <div class="poll-item">
+            <span class="poll-item-icon">☕</span>
+            <span class="poll-item-label">Café Central (fancy coffeehouse)</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="vie_cafe" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="vie_cafe" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="vie_cafe" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🎨</span>
+            <span class="poll-item-label">Belvedere / Klimt's "The Kiss"</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="vie_belvedere" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="vie_belvedere" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="vie_belvedere" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🎡</span>
+            <span class="poll-item-label">Prater & Giant Ferris Wheel</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="vie_prater" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="vie_prater" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="vie_prater" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🍷</span>
+            <span class="poll-item-label">Heuriger wine tavern</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="vie_heuriger" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="vie_heuriger" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="vie_heuriger" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🛒</span>
+            <span class="poll-item-label">Naschmarkt (food market)</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="vie_nasch" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="vie_nasch" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="vie_nasch" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🎵</span>
+            <span class="poll-item-label">Volksgarten Club (Saturday night)</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="vie_volks" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="vie_volks" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="vie_volks" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+          <div class="poll-item">
+            <span class="poll-item-icon">🏛️</span>
+            <span class="poll-item-label">MuseumsQuartier</span>
+            <div class="poll-choices">
+              <label class="pill pill--yes"><input type="radio" name="vie_mq" value="yes"><span>Yes</span></label>
+              <label class="pill pill--maybe"><input type="radio" name="vie_mq" value="maybe"><span>Maybe</span></label>
+              <label class="pill pill--skip"><input type="radio" name="vie_mq" value="skip"><span>Skip</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RANK PRIORITIES -->
+      <div class="poll-block">
+        <div class="poll-block-header">Rank Your Priorities</div>
+        <p class="poll-block-sub">Drag to reorder — or use the numbers. 1 = most important.</p>
+        <div class="rank-list" id="rank-list">
+          <div class="rank-item" data-rank-key="food" draggable="true">
+            <span class="rank-handle">⠿</span>
+            <span class="rank-num">1</span>
+            <span class="rank-icon">🍽️</span>
+            <span class="rank-label">Food & restaurants</span>
+          </div>
+          <div class="rank-item" data-rank-key="nightlife" draggable="true">
+            <span class="rank-handle">⠿</span>
+            <span class="rank-num">2</span>
+            <span class="rank-icon">🍸</span>
+            <span class="rank-label">Nightlife & bars</span>
+          </div>
+          <div class="rank-item" data-rank-key="sightseeing" draggable="true">
+            <span class="rank-handle">⠿</span>
+            <span class="rank-num">3</span>
+            <span class="rank-icon">🏛️</span>
+            <span class="rank-label">Sightseeing & culture</span>
+          </div>
+          <div class="rank-item" data-rank-key="shopping" draggable="true">
+            <span class="rank-handle">⠿</span>
+            <span class="rank-num">4</span>
+            <span class="rank-icon">🛍️</span>
+            <span class="rank-label">Shopping & markets</span>
+          </div>
+          <div class="rank-item" data-rank-key="chill" draggable="true">
+            <span class="rank-handle">⠿</span>
+            <span class="rank-num">5</span>
+            <span class="rank-icon">😎</span>
+            <span class="rank-label">Free time / chill</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK QUESTIONS -->
+      <div class="poll-block">
+        <div class="poll-block-header">Quick Questions</div>
+
+        <div class="quick-q">
+          <p class="quick-q-label">Dietary restrictions?</p>
+          <div class="poll-choices poll-choices--wide">
+            <label class="pill"><input type="radio" name="diet" value="veggie_vegan"><span>Veggie / Vegan</span></label>
+            <label class="pill"><input type="radio" name="diet" value="allergies"><span>Allergies</span></label>
+            <label class="pill"><input type="radio" name="diet" value="eat_anything"><span>Eat anything</span></label>
+          </div>
+        </div>
+
+        <div class="quick-q">
+          <p class="quick-q-label">Try local food?</p>
+          <div class="poll-choices poll-choices--wide">
+            <label class="pill"><input type="radio" name="local_food" value="yes_please"><span>Yes please</span></label>
+            <label class="pill"><input type="radio" name="local_food" value="some"><span>Some</span></label>
+            <label class="pill"><input type="radio" name="local_food" value="keep_familiar"><span>Keep familiar</span></label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- OPEN-ENDED -->
+      <div class="poll-block">
+        <div class="poll-block-header">Open-Ended</div>
+
+        <div class="open-q">
+          <label for="wishlist" class="poll-label">Wishlist & Ideas</label>
+          <p class="open-q-hint">Anything you specifically want to do, see, or eat?</p>
+          <textarea id="wishlist" name="wishlist" class="poll-textarea" rows="3" placeholder="e.g. I really want to try lángos, and I'd love a rooftop bar..."></textarea>
+        </div>
+
+        <div class="open-q">
+          <label for="concerns" class="poll-label">Concerns or Schedule Conflicts</label>
+          <p class="open-q-hint">Budget, flight times, things to avoid?</p>
+          <textarea id="concerns" name="concerns" class="poll-textarea" rows="3" placeholder="e.g. I need to be back by Sunday night, allergic to shellfish..."></textarea>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="poll-submit-wrap">
+        <button type="button" id="poll-submit" class="poll-submit">Copy My Votes</button>
+        <p class="poll-submit-hint">Copies your responses as text so you can paste them in the group chat.</p>
+      </div>
+
+    </form>
+
+    <!-- CONFIRMATION -->
+    <div id="poll-confirmation" class="poll-confirmation" hidden>
+      <div class="poll-confirmation-icon">✓</div>
+      <h3>Copied to clipboard</h3>
+      <p>Paste your votes into the group chat. Thanks for voting!</p>
+      <pre id="poll-output" class="poll-output"></pre>
+      <button type="button" id="poll-reset" class="poll-reset">Vote Again</button>
+    </div>
+
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container footer-inner">
@@ -452,8 +740,166 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.timeline-item, .booking-card, .card, .must-do, .food-category').forEach(el => {
+document.querySelectorAll('.timeline-item, .booking-card, .card, .must-do, .food-category, .poll-block').forEach(el => {
   observer.observe(el);
+});
+
+// ===== POLL: Pill selection =====
+document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    const group = radio.name;
+    document.querySelectorAll(`input[name="${group}"]`).forEach(r => {
+      r.closest('.pill').classList.remove('pill--selected');
+    });
+    radio.closest('.pill').classList.add('pill--selected');
+  });
+});
+
+// ===== POLL: Drag-to-rank =====
+(function() {
+  const list = document.getElementById('rank-list');
+  if (!list) return;
+  let dragItem = null;
+
+  list.addEventListener('dragstart', e => {
+    dragItem = e.target.closest('.rank-item');
+    if (dragItem) {
+      dragItem.classList.add('rank-item--dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+  });
+  list.addEventListener('dragend', () => {
+    if (dragItem) dragItem.classList.remove('rank-item--dragging');
+    dragItem = null;
+    updateRankNums();
+  });
+  list.addEventListener('dragover', e => {
+    e.preventDefault();
+    const after = getDragAfterElement(list, e.clientY);
+    if (dragItem) {
+      if (after == null) list.appendChild(dragItem);
+      else list.insertBefore(dragItem, after);
+    }
+  });
+
+  function getDragAfterElement(container, y) {
+    const els = [...container.querySelectorAll('.rank-item:not(.rank-item--dragging)')];
+    return els.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) return { offset, element: child };
+      return closest;
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+
+  // Touch support
+  let touchItem = null, touchClone = null, touchStartY = 0;
+  list.addEventListener('touchstart', e => {
+    const item = e.target.closest('.rank-item');
+    if (!item) return;
+    touchItem = item;
+    touchStartY = e.touches[0].clientY;
+    touchItem.classList.add('rank-item--dragging');
+  }, { passive: true });
+  list.addEventListener('touchmove', e => {
+    if (!touchItem) return;
+    e.preventDefault();
+    const y = e.touches[0].clientY;
+    const after = getDragAfterElement(list, y);
+    if (after == null) list.appendChild(touchItem);
+    else list.insertBefore(touchItem, after);
+  }, { passive: false });
+  list.addEventListener('touchend', () => {
+    if (touchItem) touchItem.classList.remove('rank-item--dragging');
+    touchItem = null;
+    updateRankNums();
+  });
+
+  function updateRankNums() {
+    list.querySelectorAll('.rank-item').forEach((item, i) => {
+      item.querySelector('.rank-num').textContent = i + 1;
+    });
+  }
+})();
+
+// ===== POLL: Copy votes =====
+document.getElementById('poll-submit').addEventListener('click', () => {
+  const form = document.getElementById('poll-form');
+  const name = form.voter_name.value.trim() || 'Anonymous';
+  let txt = `🗳️ VOTES — ${name}\n${'─'.repeat(30)}\n\n`;
+
+  txt += '🇭🇺 BUDAPEST\n';
+  const budItems = [
+    ['bud_prosecco', '🥂 Prosecco Cruise'],
+    ['bud_baths', '♨️ Thermal Baths'],
+    ['bud_szimpla', '🍻 Szimpla Kert'],
+    ['bud_castle', '🏰 Buda Castle'],
+    ['bud_gellert', '🌅 Gellért Hill'],
+    ['bud_parliament', '🏛️ Parliament'],
+    ['bud_market', '🛒 Central Market'],
+    ['bud_danube', '🌉 Danube Walk'],
+    ['bud_vajda', '🏰 Vajdahunyad'],
+    ['bud_zoo', '🐾 Zoo Café'],
+  ];
+  budItems.forEach(([n, label]) => {
+    const v = form[n] ? (form[n].value || '—') : '—';
+    const checked = form.querySelector(`input[name="${n}"]:checked`);
+    txt += `  ${label}: ${checked ? checked.value.toUpperCase() : '—'}\n`;
+  });
+
+  txt += '\n🇦🇹 VIENNA\n';
+  const vieItems = [
+    ['vie_cafe', '☕ Café Central'],
+    ['vie_belvedere', '🎨 Belvedere'],
+    ['vie_prater', '🎡 Prater'],
+    ['vie_heuriger', '🍷 Heuriger'],
+    ['vie_nasch', '🛒 Naschmarkt'],
+    ['vie_volks', '🎵 Volksgarten'],
+    ['vie_mq', '🏛️ MuseumsQuartier'],
+  ];
+  vieItems.forEach(([n, label]) => {
+    const checked = form.querySelector(`input[name="${n}"]:checked`);
+    txt += `  ${label}: ${checked ? checked.value.toUpperCase() : '—'}\n`;
+  });
+
+  txt += '\n📊 PRIORITIES\n';
+  document.querySelectorAll('#rank-list .rank-item').forEach((item, i) => {
+    txt += `  ${i+1}. ${item.querySelector('.rank-icon').textContent} ${item.querySelector('.rank-label').textContent}\n`;
+  });
+
+  txt += '\n❓ QUICK QUESTIONS\n';
+  const diet = form.querySelector('input[name="diet"]:checked');
+  txt += `  Diet: ${diet ? diet.value.replace(/_/g, ' ') : '—'}\n`;
+  const local = form.querySelector('input[name="local_food"]:checked');
+  txt += `  Local food: ${local ? local.value.replace(/_/g, ' ') : '—'}\n`;
+
+  const wishlist = form.wishlist.value.trim();
+  const concerns = form.concerns.value.trim();
+  if (wishlist) txt += `\n💡 WISHLIST\n  ${wishlist}\n`;
+  if (concerns) txt += `\n⚠️ CONCERNS\n  ${concerns}\n`;
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(txt).catch(() => {});
+
+  // Show confirmation
+  document.getElementById('poll-output').textContent = txt;
+  form.hidden = true;
+  const conf = document.getElementById('poll-confirmation');
+  conf.hidden = false;
+  conf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+// Reset
+document.getElementById('poll-reset').addEventListener('click', () => {
+  document.getElementById('poll-confirmation').hidden = true;
+  const form = document.getElementById('poll-form');
+  form.hidden = false;
+  form.reset();
+  document.querySelectorAll('.pill--selected').forEach(p => p.classList.remove('pill--selected'));
+  document.querySelectorAll('#rank-list .rank-item').forEach((item, i) => {
+    item.querySelector('.rank-num').textContent = i + 1;
+  });
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 </script>
 

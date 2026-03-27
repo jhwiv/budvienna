@@ -41,29 +41,32 @@
   /* Transitions */
   --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* ===== TRAVEL PALETTE — warm amber + slate ===== */
-  --color-bg:             #faf8f4;
+  /* ===== SKIDMORE PALETTE — green #006A52, gold #FFD100, green-black #22372B ===== */
+  --color-bg:             #f6f8f7;
   --color-surface:        #ffffff;
-  --color-surface-2:      #f5f2ec;
-  --color-surface-offset: #eee9e0;
-  --color-divider:        #e0dbd3;
-  --color-border:         #d4cfc5;
+  --color-surface-2:      #eef3f1;
+  --color-surface-offset: #e5ece9;
+  --color-divider:        #d0dbd6;
+  --color-border:         #bfccc6;
 
-  --color-text:           #1e1c18;
-  --color-text-muted:     #706b62;
-  --color-text-faint:     #a8a39a;
+  --color-text:           #22372B;
+  --color-text-muted:     #4d6358;
+  --color-text-faint:     #8fa399;
 
-  --color-primary:        #c47a1a;
-  --color-primary-hover:  #a66410;
-  --color-primary-active: #8a5209;
-  --color-primary-light:  #fdf0dd;
+  --color-primary:        #006A52;
+  --color-primary-hover:  #005443;
+  --color-primary-active: #003d31;
+  --color-primary-light:  #e0f2ec;
 
-  --color-accent-bud:     #c47a1a;
-  --color-accent-vie:     #6b4c8a;
+  --color-gold:           #FFD100;
+  --color-gold-dark:      #c9a500;
 
-  --shadow-sm: 0 1px 3px rgba(30, 28, 24, 0.06);
-  --shadow-md: 0 4px 12px rgba(30, 28, 24, 0.08);
-  --shadow-lg: 0 12px 32px rgba(30, 28, 24, 0.1);
+  --color-accent-bud:     #006A52;
+  --color-accent-vie:     #006A52;
+
+  --shadow-sm: 0 1px 3px rgba(34, 55, 43, 0.06);
+  --shadow-md: 0 4px 12px rgba(34, 55, 43, 0.08);
+  --shadow-lg: 0 12px 32px rgba(34, 55, 43, 0.1);
 }
 
 /* ===== BASE RESET ===== */
@@ -106,7 +109,7 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(250, 248, 244, 0.92);
+  background: rgba(246, 248, 247, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
@@ -163,7 +166,7 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   .menu-toggle { display: flex; }
   .nav {
     position: fixed; top: 60px; left: 0; right: 0;
-    background: rgba(250, 248, 244, 0.98);
+    background: rgba(246, 248, 247, 0.98);
     backdrop-filter: blur(12px);
     flex-direction: column;
     padding: var(--space-6);
@@ -178,77 +181,56 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
 
 /* ===== HERO ===== */
 .hero {
-  min-height: 70vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: var(--space-16) var(--space-6);
+  position: relative;
+  overflow: hidden;
+  background: #22372B;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(180deg, rgba(250,248,244,0) 0%, rgba(250,248,244,1) 100%),
-    linear-gradient(135deg, #fdf0dd 0%, #f5eadb 30%, #ece0d5 60%, #e8ddd6 100%);
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,106,82,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 20%, rgba(255,209,0,0.08) 0%, transparent 60%);
+  pointer-events: none;
 }
-.hero-content { max-width: 700px; }
-/* Hero logo lockup */
-.hero-logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-8);
+.hero-content {
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
 }
-.hero-logo {
-  width: clamp(140px, 20vw, 220px);
+.hero-mascot {
+  width: clamp(220px, 36vw, 380px);
   height: auto;
-  display: block;
+  margin: 0 auto var(--space-6);
+  filter: brightness(0) invert(1);
 }
-.hero-logo-divider {
-  width: 1px;
-  height: 36px;
-  background: var(--color-border);
-  flex-shrink: 0;
-}
-.hero-logo-text {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: var(--text-sm);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #006A52;
+.hero-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--color-gold);
+  margin: 0 auto var(--space-6);
+  border-radius: 2px;
 }
 
-@media (max-width: 480px) {
-  .hero-logo-wrap {
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-  .hero-logo-divider {
-    width: 40px;
-    height: 1px;
-  }
-}
-
-.hero-tag {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: var(--text-sm);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-primary);
-  margin-bottom: var(--space-4);
-}
 .hero-title {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: var(--text-3xl);
-  color: var(--color-text);
-  margin-bottom: var(--space-4);
-  letter-spacing: -0.02em;
+  font-size: var(--text-2xl);
+  color: #ffffff;
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.01em;
 }
 .hero-subtitle {
-  font-size: var(--text-lg);
-  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.6);
   margin-bottom: var(--space-8);
+  letter-spacing: 0.03em;
 }
 .hero-people {
   display: flex;
@@ -257,13 +239,13 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   flex-wrap: wrap;
 }
 .person-badge {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-xl);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: var(--color-text-muted);
+  color: rgba(255,255,255,0.8);
 }
 
 /* ===== SECTIONS ===== */
@@ -435,13 +417,13 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
 }
 
 /* Budapest accent color for city name */
-#budapest .city-name { color: var(--color-accent-bud); }
-#vienna .city-name { color: var(--color-accent-vie); }
+#budapest .city-name { color: var(--color-primary); }
+#vienna .city-name { color: var(--color-primary); }
 
 /* ===== MUST-DO ===== */
 .must-do {
-  background: linear-gradient(135deg, #fef7ec 0%, #fff8f0 100%);
-  border: 1px solid #ecdcc6;
+  background: linear-gradient(135deg, #e8f5f0 0%, #eef7f3 100%);
+  border: 1px solid #c2ddd4;
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   margin-bottom: var(--space-8);

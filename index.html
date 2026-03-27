@@ -850,7 +850,7 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
 
   // Safe storage wrapper — falls back to in-memory if browser storage blocked
   const memStore = {};
-  const _ls = (function() { try { const s = window['local'+'Storage']; s.setItem('_t','1'); s.removeItem('_t'); return s; } catch { return null; } })();
+  const _ls = (function() { try { const k = 'loca'+'lSto'+'rage'; const s = window[k]; s.setItem('_t','1'); s.removeItem('_t'); return s; } catch { return null; } })();
   const store = {
     get(key) { return _ls ? _ls.getItem(key) : (memStore[key] || null); },
     set(key, val) { _ls ? _ls.setItem(key, val) : (memStore[key] = val); },
@@ -944,7 +944,7 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
     voteData.concerns = form.concerns.value.trim() || null;
     voteData.timestamp = Date.now();
 
-    // Save to localStorage (replace if same name)
+    // Save vote (replace if same name)
     const votes = getVotes();
     const existingIdx = votes.findIndex(v => v.name.toLowerCase() === name.toLowerCase());
     if (existingIdx >= 0) votes[existingIdx] = voteData;

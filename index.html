@@ -765,14 +765,23 @@ document.querySelectorAll('.timeline-item, .booking-card, .card, .must-do, .food
   observer.observe(el);
 });
 
-// ===== POLL: Pill selection =====
-document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
-  radio.addEventListener('change', () => {
+// ===== POLL: Pill selection (tap again to deselect) =====
+document.querySelectorAll('.pill').forEach(pill => {
+  const radio = pill.querySelector('input[type="radio"]');
+  if (!radio) return;
+  pill.addEventListener('click', (e) => {
+    e.preventDefault();
     const group = radio.name;
+    const wasSelected = pill.classList.contains('pill--selected');
+    // Clear all in group
     document.querySelectorAll(`input[name="${group}"]`).forEach(r => {
       r.closest('.pill').classList.remove('pill--selected');
+      r.checked = false;
     });
-    radio.closest('.pill').classList.add('pill--selected');
+    if (!wasSelected) {
+      radio.checked = true;
+      pill.classList.add('pill--selected');
+    }
   });
 });
 

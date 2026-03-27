@@ -687,12 +687,12 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--space-3);
-  padding: var(--space-4);
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
   background: var(--color-bg);
   border: 1px solid var(--color-divider);
-  min-height: 56px;
+  min-height: 0;
   transition: border-color var(--transition-interactive);
 }
 .poll-item:hover {
@@ -907,6 +907,25 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
 }
 
 /* Submit */
+/* Saved banner */
+.poll-saved-banner {
+  text-align: center;
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-3);
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.poll-saved-banner.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .poll-submit-wrap {
   text-align: center;
   padding-top: var(--space-4);
@@ -1008,10 +1027,19 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
 /* Poll mobile responsiveness */
 @media (max-width: 640px) {
   .poll-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
-    padding: var(--space-4);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    min-height: 0;
+  }
+  .poll-item-icon {
+    font-size: 1.1rem;
+  }
+  .poll-item-label {
+    font-size: var(--text-sm);
+    flex: 1 1 140px;
   }
   .poll-choices {
     width: 100%;
@@ -1019,9 +1047,9 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   .pill {
     flex: 1;
     min-width: 0;
-    padding: var(--space-2) var(--space-3);
-    min-height: 38px;
-    font-size: var(--text-sm);
+    padding: var(--space-1) var(--space-2);
+    min-height: 34px;
+    font-size: var(--text-xs);
   }
   .poll-items,
   .rank-list,

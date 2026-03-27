@@ -924,11 +924,19 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
     else votes.push(voteData);
     saveVotes(votes);
 
-    // Show confirmation
-    form.hidden = true;
-    const conf = document.getElementById('poll-confirmation');
-    conf.hidden = false;
-    conf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Show inline confirmation banner (form stays editable)
+    const submitBtn = document.getElementById('poll-submit');
+    submitBtn.textContent = 'Update Vote';
+    let banner = document.getElementById('poll-saved-banner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'poll-saved-banner';
+      banner.className = 'poll-saved-banner';
+      banner.innerHTML = '✓ Vote saved — change any answers and tap <strong>Update Vote</strong>';
+      submitBtn.parentNode.insertBefore(banner, submitBtn);
+    }
+    banner.classList.add('show');
+    setTimeout(() => banner.classList.remove('show'), 4000);
 
     // Open and refresh results
     renderResults();
@@ -939,6 +947,9 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
       toggle.classList.add('open');
       toggle.querySelector('span:first-child').textContent = 'Hide Results';
     }
+
+    // Scroll to results
+    document.getElementById('results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   // Reset
@@ -951,6 +962,9 @@ document.querySelectorAll('.pill input[type="radio"]').forEach(radio => {
     document.querySelectorAll('#rank-list .rank-item').forEach((item, i) => {
       item.querySelector('.rank-num').textContent = i + 1;
     });
+    document.getElementById('poll-submit').textContent = 'Submit Vote';
+    const banner = document.getElementById('poll-saved-banner');
+    if (banner) banner.remove();
     form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 

@@ -186,18 +186,22 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--space-16) var(--space-6);
+  padding: var(--space-16) var(--space-6) var(--space-12);
   position: relative;
   overflow: hidden;
-  background: #22372B;
+  background: var(--color-bg);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-gold), var(--color-primary));
 }
 .hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,106,82,0.35) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 50% at 80% 20%, rgba(255,209,0,0.08) 0%, transparent 60%);
-  pointer-events: none;
+  display: none;
 }
 .hero-content {
   max-width: 700px;
@@ -205,10 +209,10 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   z-index: 1;
 }
 .hero-mascot {
-  width: clamp(220px, 36vw, 380px);
+  width: clamp(240px, 40vw, 420px);
   height: auto;
   margin: 0 auto var(--space-6);
-  filter: brightness(0) invert(1);
+  filter: drop-shadow(0 2px 8px rgba(34,55,43,0.12));
 }
 .hero-divider {
   width: 60px;
@@ -222,13 +226,13 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   font-family: var(--font-display);
   font-weight: 500;
   font-size: var(--text-2xl);
-  color: #ffffff;
+  color: var(--color-text);
   margin-bottom: var(--space-3);
   letter-spacing: -0.01em;
 }
 .hero-subtitle {
   font-size: var(--text-base);
-  color: rgba(255,255,255,0.6);
+  color: var(--color-text-muted);
   margin-bottom: var(--space-8);
   letter-spacing: 0.03em;
 }
@@ -239,13 +243,13 @@ button { cursor: pointer; background: none; border: none; font: inherit; }
   flex-wrap: wrap;
 }
 .person-badge {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-border);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-xl);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: rgba(255,255,255,0.8);
+  color: var(--color-primary);
 }
 
 /* ===== SECTIONS ===== */
